@@ -1,5 +1,5 @@
 <template>
     <div>
-        <img src="/logo.svg" alt="">
+        <h1>Main Page</h1>
     </div>
 </template>
