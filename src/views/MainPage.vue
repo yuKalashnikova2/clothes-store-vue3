@@ -2,6 +2,8 @@
 import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
 import ContentCardList from '../components/ContentCardList.vue'
+import CardProductList from '../components/CardProductList.vue'
+import CardTitle from '../components/CardTitle.vue'
 </script>
 
 <template>
@@ -29,6 +31,18 @@ import ContentCardList from '../components/ContentCardList.vue'
 
         <div class="content__info__image">
           <img src="/content/content-4.png" alt="pic" />
+        </div>
+      </div>
+
+      <div class="content__decor">
+        <div>
+          <CardTitle title="Categories For Men" />
+          <CardProductList />
+        </div>
+
+        <div>
+          <CardTitle title="Categories For Women" />
+          <CardProductList />
         </div>
       </div>
     </div>
@@ -94,6 +108,18 @@ import ContentCardList from '../components/ContentCardList.vue'
     &__button {
       display: block;
       padding-top: 50px;
+    }
+  }
+  &__decor {
+    margin-top: 80px;
+    @media (max-width: 992px) {
+      margin-top: 50px;
+    }
+    & > * {
+      margin-bottom: 103px;
+      @media (max-width: 992px) {
+        margin-bottom: 50px;
+      }
     }
   }
 }
