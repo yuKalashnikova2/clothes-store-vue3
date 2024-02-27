@@ -14,6 +14,6 @@ import HeaderTop from './components/HeaderTop.vue'
   .container {
     max-width: 1440px;
     margin: 0 auto;
-    background: pink;
+    background: #FFF;
   }
 </style>
