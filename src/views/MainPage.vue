@@ -22,9 +22,8 @@ import ContentCardList from '../components/ContentCardList.vue'
               EVERYDAY wear range - Comfortable & Affordable fashion 24/7</span
             >
             <router-link class="content__info__button" to="/shop">
-                <Button label="Shop Now" />
+              <Button label="Shop Now" />
             </router-link>
-        
           </div>
         </div>
 
@@ -62,6 +61,9 @@ import ContentCardList from '../components/ContentCardList.vue'
       background-size: cover;
       background-position: center;
       padding: 0 74px;
+      @media (max-width: 992px) {
+        padding: 40px 30px;
+      }
     }
     &__title {
       font-family: var(--second-family);
@@ -70,9 +72,12 @@ import ContentCardList from '../components/ContentCardList.vue'
       line-height: 147%;
       letter-spacing: 0.01em;
       padding-bottom: 30px;
+      @media (max-width: 992px) {
+        font-size: 24px;
+      }
     }
     &__subtitle {
-        display: block;
+      display: block;
       font-family: var(--font-family);
       font-weight: 300;
       font-size: 20px;
@@ -81,13 +86,14 @@ import ContentCardList from '../components/ContentCardList.vue'
     &__image {
       flex-shrink: 0;
       img {
+        display: block;
         width: 100%;
         height: 100%;
       }
     }
     &__button {
-        display: block;
-        padding-top: 50px;
+      display: block;
+      padding-top: 50px;
     }
   }
 }

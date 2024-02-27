@@ -26,7 +26,6 @@ import 'swiper/scss/scrollbar'
 
           <router-link to="/shop">
             <Button label="Shop Now" />
-            <!-- <button class="banner__button">Shop Now</button> -->
           </router-link>
         </div>
         <div class="for"></div>
@@ -53,7 +52,8 @@ import 'swiper/scss/scrollbar'
   width: 100%;
   @media (max-width: 992px) {
     display: block;
-    height: 700px;
+    height: 500px;
+    
   }
   &__text {
     display: flex;
