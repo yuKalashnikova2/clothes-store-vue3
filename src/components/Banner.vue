@@ -1,4 +1,5 @@
 <script setup>
+import Button from './Button.vue'
 import { Scrollbar, Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -24,7 +25,8 @@ import 'swiper/scss/scrollbar'
           ool / Colorful / Comfy Shop Now
 
           <router-link to="/shop">
-            <button class="banner__button">Shop Now</button>
+            <Button label="Shop Now" />
+            <!-- <button class="banner__button">Shop Now</button> -->
           </router-link>
         </div>
         <div class="for"></div>
@@ -84,17 +86,17 @@ import 'swiper/scss/scrollbar'
       font-size: 32px;
     }
   }
-  &__button {
-    border-radius: 8px;
-    padding: 16px 72px;
-    background: #fff;
-    border: none;
-    font-weight: 700;
-    font-size: 24px;
-    text-align: center;
-    color: #3c4242;
-    cursor: pointer;
-  }
+  // &__button {
+  //   border-radius: 8px;
+  //   padding: 16px 72px;
+  //   background: #fff;
+  //   border: none;
+  //   font-weight: 700;
+  //   font-size: 24px;
+  //   text-align: center;
+  //   color: #3c4242;
+  //   cursor: pointer;
+  // }
 }
 .for {
   @media (max-width: 767px) {

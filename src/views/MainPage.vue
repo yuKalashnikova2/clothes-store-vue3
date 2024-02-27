@@ -1,4 +1,5 @@
 <script setup>
+import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
 import ContentCardList from '../components/ContentCardList.vue'
 </script>
@@ -20,6 +21,10 @@ import ContentCardList from '../components/ContentCardList.vue'
               >In our journey to improve everyday fashion, euphoria presents
               EVERYDAY wear range - Comfortable & Affordable fashion 24/7</span
             >
+            <router-link class="content__info__button" to="/shop">
+                <Button label="Shop Now" />
+            </router-link>
+        
           </div>
         </div>
 
@@ -67,6 +72,7 @@ import ContentCardList from '../components/ContentCardList.vue'
       padding-bottom: 30px;
     }
     &__subtitle {
+        display: block;
       font-family: var(--font-family);
       font-weight: 300;
       font-size: 20px;
@@ -78,6 +84,10 @@ import ContentCardList from '../components/ContentCardList.vue'
         width: 100%;
         height: 100%;
       }
+    }
+    &__button {
+        display: block;
+        padding-top: 50px;
     }
   }
 }
