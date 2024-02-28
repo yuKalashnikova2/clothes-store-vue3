@@ -5,6 +5,7 @@ import ContentCardList from '../components/ContentCardList.vue'
 import CardProduct from '../components/CardProduct.vue'
 import CardTitle from '../components/CardTitle.vue'
 import { useProductsStore } from '../stores/index.js'
+import TopBrandsDeal from '../components/TopBrandsDeal.vue'
 const store = useProductsStore()
 </script>
 
@@ -48,6 +49,8 @@ const store = useProductsStore()
           <CardTitle title="Categories For Women" />
         </div>
       </div>
+
+      <TopBrandsDeal />
     </div>
   </div>
 </template>
