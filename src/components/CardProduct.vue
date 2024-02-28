@@ -1,18 +1,27 @@
-<script setup></script>
+<script setup>
+import {useProductsStore} from '../stores/index.js'
+const store = useProductsStore()
+
+  const props = defineProps({
+  productsMen: {
+    type: Array,
+    required: true
+  }
+})
+
+</script>
 
 <template>
-  <div class="card__product">
+  <div class="card__product" v-for="product in store.productsMen">
     <div class="card__product__image">
-      <img src="/product.png" alt="product" />
+      <img :src="product.url" :alt="product.name" />
     </div>
 
     <div class="card__product__info">
       <div class="card__product__text">
-        <h5 class="card__product__title">Shirts</h5>
+        <h5 class="card__product__title">{{ product.name }}</h5>
         <h3 class="card__product__subtitle">Explore Now!</h3>
       </div>
-
-      <slot></slot>
       <router-link to="/next">
         <img class="card__product__arrow" src="/arrow.svg" alt="next" />
       </router-link>

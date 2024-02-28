@@ -2,8 +2,10 @@
 import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
 import ContentCardList from '../components/ContentCardList.vue'
-import CardProductList from '../components/CardProductList.vue'
+import CardProduct from '../components/CardProduct.vue'
 import CardTitle from '../components/CardTitle.vue'
+import { useProductsStore } from '../stores/index.js'
+const store = useProductsStore()
 </script>
 
 <template>
@@ -35,14 +37,15 @@ import CardTitle from '../components/CardTitle.vue'
       </div>
 
       <div class="content__decor">
-        <div>
+        <div >
           <CardTitle title="Categories For Men" />
-          <CardProductList />
+          <div class="card__list">
+            <CardProduct :productsMen="store.productsMen" />
+          </div>
         </div>
 
         <div>
           <CardTitle title="Categories For Women" />
-          <CardProductList />
         </div>
       </div>
     </div>
@@ -121,6 +124,21 @@ import CardTitle from '../components/CardTitle.vue'
         margin-bottom: 50px;
       }
     }
+  }
+}
+.card__list {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+  margin-top: 70px;
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 </style>

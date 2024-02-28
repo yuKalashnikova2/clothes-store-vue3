@@ -1,13 +1,37 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref as vueRef, onMounted } from 'vue'
 
-export const useCounterStore = defineStore('counter', () => {
-    const count = ref(0)
-    const name = ref('Eduardo')
-    const doubleCount = computed(() => count.value * 2)
-    function increment() {
-      count.value++
+import {
+  getStorage,
+  getDownloadURL,
+  listAll,
+  ref
+} from 'firebase/storage'
+
+export const useProductsStore = defineStore('products', () => {
+    const productsMen = vueRef([])
+    const storage = getStorage()
+    const fetchFilesFromFirebase = async () => {
+      try {
+        const listRef = ref(storage, 'men/')
+        const listResult = await listAll(listRef)
+        for (const itemRef of listResult.items) {
+          const url = await getDownloadURL(itemRef)
+          productsMen.value.push({
+            name: itemRef.name,
+            url,
+          })
+        }
+        console.log('МАССИВ КАРТОЧЕК', productsMen.value)
+      } catch (error) {
+        console.log('ERROR', error)
+      }
     }
   
-    return { count, name, doubleCount, increment }
+    onMounted(() => {
+      fetchFilesFromFirebase()
+  })
+
+  
+    return { productsMen, fetchFilesFromFirebase }
   })
