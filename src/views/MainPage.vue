@@ -1,4 +1,7 @@
 <script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination } from 'swiper/modules'
+
 import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
 import ContentCardList from '../components/ContentCardList.vue'
@@ -6,6 +9,10 @@ import CardProduct from '../components/CardProduct.vue'
 import CardTitle from '../components/CardTitle.vue'
 import { useProductsStore } from '../stores/index.js'
 import TopBrandsDeal from '../components/TopBrandsDeal.vue'
+import FeedbacCard from '../components/FeedbacCard.vue'
+import 'swiper/css'
+import 'swiper/css/pagination'
+
 const store = useProductsStore()
 </script>
 
@@ -38,7 +45,7 @@ const store = useProductsStore()
       </div>
 
       <div class="content__decor">
-        <div >
+        <div>
           <CardTitle title="Categories For Men" />
           <div class="card__list">
             <CardProduct :productsMen="store.productsMen" />
@@ -51,6 +58,28 @@ const store = useProductsStore()
       </div>
 
       <TopBrandsDeal />
+
+      <div class="content_margin_135">
+        <CardTitle title="Feedback" />
+        <swiper :modules="[Pagination]" :pagination="true">
+          <SwiperSlide class="content__feedback">
+            <FeedbacCard />
+            <FeedbacCard />
+            <FeedbacCard />
+          </SwiperSlide>
+
+          <SwiperSlide class="content__feedback">
+            <FeedbacCard />
+            <FeedbacCard />
+            <FeedbacCard />
+          </SwiperSlide>
+          <SwiperSlide class="content__feedback">
+            <FeedbacCard />
+            <FeedbacCard />
+            <FeedbacCard />
+          </SwiperSlide>
+        </swiper>
+      </div>
     </div>
   </div>
 </template>
@@ -128,6 +157,21 @@ const store = useProductsStore()
       }
     }
   }
+  &_margin_135 {
+    margin-top: 135px;
+    @media (max-width: 992px) {
+      margin-top: 35px;
+    }
+  }
+  &__feedback {
+    margin-top: 70px;
+    display: flex;
+    gap: 23px;
+    @media (max-width: 992px) {
+      flex-direction: column;
+      margin-top: 35px;
+    }
+  }
 }
 .card__list {
   display: flex;
@@ -142,6 +186,17 @@ const store = useProductsStore()
   }
   @media (max-width: 767px) {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.swiper-pagination-bullet {
+  background-color: rgba(34, 34, 34, 0.3);
+  @media (max-width: 992px) {
+    display: none;
+  }
+
+  &-active {
+    background-color: #3c4242;
   }
 }
 </style>
