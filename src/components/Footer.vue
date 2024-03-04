@@ -86,8 +86,13 @@
       </div>
     </div>
 
-    <div class="footer__select">
-      <span class="footer__info__title">Popular Categories</span>
+    <div class="footer__select__wrapper">
+      <select class="footer__select" name="" id="">
+        <option >Popular Categories</option>
+        <option  value="women">Women</option>
+        <option  value="t-shirt">T-shirt</option>
+        <option  value="men">Men</option>
+      </select>
     </div>
 
     <div class="footer__copyright">
@@ -194,7 +199,29 @@
   &__select {
     border-top: 1px solid #bebcbd;
     border-bottom: 1px solid #bebcbd;
-    opacity: 0.4;
+    border-left: none;
+    border-right: none;
+    padding: 0.6em 1.4em 0.5em 0.8em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 217%;
+    background-color: #3c4242;
+    color: #f6f6f6;
+    outline: none;
+    width: 100%;
+    max-width: 100%;
+    cursor: pointer;
+    background-image: url('/select-arrow.svg');
+    background-repeat: no-repeat, repeat;
+    background-position: right 0.7em top 50%, 0 0;
+    background-size: 0.65em auto, 100%;
+    &__wrapper {
+      margin-top: 32px;
+    }
   }
   &__copyright {
     font-weight: 700;
