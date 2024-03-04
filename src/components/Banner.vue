@@ -25,7 +25,7 @@ import 'swiper/scss/scrollbar'
           ool / Colorful / Comfy Shop Now
 
           <router-link to="/shop">
-            <Button label="Shop Now" />
+            <Button label="Shop Now" size="medium" />
           </router-link>
         </div>
         <div class="for"></div>

@@ -33,3 +33,7 @@ ul li {
 input {
   all: unset;
 }
+
+select {
+  outline: none;
+}

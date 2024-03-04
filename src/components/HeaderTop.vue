@@ -46,13 +46,14 @@
   </header>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px 100px;
   background-color: #fff;
+  border-bottom: 1px solid #bebcbd;
   @media (max-width: 1250px) {
     padding: 15px 25px;
   }
