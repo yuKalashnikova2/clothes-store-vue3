@@ -27,8 +27,12 @@ const changeTypePassword = () => {
 
       <form class="sign-in__form__submit" @submit.prevent>
         <div class="sign-in__form__submit__buttons">
-          <Button label="Continue With Google" color="secondary" />
-          <Button label="Continue With Twitter" color="secondary" />
+          <Button label="Continue With Google" color="secondary">
+            <img src="/social/google.svg" alt="google">
+          </Button>
+          <Button label="Continue With Twitter" color="secondary">
+            <img src="/social/twitter.svg" alt="google">
+          </Button>
         </div>
         <div class="sign-in__form__submit__divider">
           <div class="divider"></div>
@@ -74,9 +78,11 @@ const changeTypePassword = () => {
             <router-link to="/">
               <Button label="Sign In" />
             </router-link>
-            <span>
+            <span >
               Don’t have an account?
-              <router-link to="/signup">Sign up </router-link>
+              <router-link  to="/signup">
+                <span class="sign-in__form__submit__inputs__sign_uderline"> Sign up</span>
+                </router-link>
             </span>
           </div>
         </div>
@@ -151,7 +157,10 @@ const changeTypePassword = () => {
           color: #3c4242;
           a {
             display: inline-block;
+          }
+          &_uderline {
             text-decoration: underline;
+            text-decoration-skip-ink: none;
           }
         }
         &__hide {

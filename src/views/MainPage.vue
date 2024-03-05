@@ -34,7 +34,7 @@ const store = useProductsStore()
               EVERYDAY wear range - Comfortable & Affordable fashion 24/7</span
             >
             <router-link class="content__info__button" to="/shop">
-              <Button label="Shop Now" />
+              <Button label="Shop Now" size="medium" />
             </router-link>
           </div>
         </div>

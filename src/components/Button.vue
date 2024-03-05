@@ -31,11 +31,17 @@ const btnStyleSize = computed ((size) =>  {
 
 </script>
 <template>
-  <button :class="['button',color === 'secondary' ? 'button_secondary' : 'button', size === 'medium' ? 'button_medium' : 'button']">{{ label }}</button>
+  <button :class="['button',color === 'secondary' ? 'button_secondary' : 'button', size === 'medium' ? 'button_medium' : 'button']">
+    <slot></slot>
+  {{ label }}</button>
 </template>
 
 <style lang="scss" scoped>
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   border-radius: 8px;
   padding: 12px 48px;
   background: #8a33fd;
@@ -45,14 +51,18 @@ const btnStyleSize = computed ((size) =>  {
   cursor: pointer;
   font-weight: 500;
   font-size: 18px;
-
   &:hover {
-    background: #f6f6f6;
+    background: #8a33fd;
+    opacity: 0.9;
   }
+ 
   &_secondary {
     color: #8a33fd;
     background: #fff;
     border: 1px solid #3c4242;
+    &:hover {
+    background: #f6f6f6;
+  }
   }
   &_medium {
     background: #fff;
@@ -60,6 +70,10 @@ const btnStyleSize = computed ((size) =>  {
     font-weight: 700;
     font-size: 24px;
     padding: 16px 72px;
+    border: 1px solid #fff;
+    &:hover {
+    background: #f6f6f6;
+  }
   }
   @media (max-width: 992px) {
     font-size: 16px;
