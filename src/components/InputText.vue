@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  wrongInput: {
+    type: Boolean,
+    required: false,
+  },
 })
 const emits = defineEmits(['update:value'])
 </script>
@@ -31,7 +35,7 @@ const emits = defineEmits(['update:value'])
     </label>
 
     <input
-      class="input__text"
+      :class="['input__text', wrongInput ? 'input__text_error' : '']"
       :type="type"
       :placeholder="placeholder"
       :name="name"
@@ -60,6 +64,11 @@ const emits = defineEmits(['update:value'])
     border-radius: 8px;
     padding-left: 15px;
     padding: 17px 15px;
+    &_error {
+      background: rgba(102, 32, 193, 0.03);
+      border: 1px solid #8a33fd;
+      color:#8a33fd;
+    }
   }
 }
 </style>

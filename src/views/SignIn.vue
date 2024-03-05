@@ -68,7 +68,7 @@ const changeTypePassword = () => {
             </InputText>
             <router-link
               class="sign-in__form__submit__inputs__forgot"
-              to="/reset-password"
+              to="/resetpassword"
             >
               Forget your password
             </router-link>
@@ -91,109 +91,122 @@ const changeTypePassword = () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
-.sign-in {
-  display: flex;
-  gap: 70px;
-  @media (max-width: 992px) {
-    flex-direction: column;
-  }
-  &__image {
-    img {
-      @media (max-width: 767px) {
-        display: none;
-      }
-    }
-    @media (max-width: 992px) {
-      order: 2;
-    }
-  }
-  &__form {
-    padding-top: 60px;
-    flex-grow: 1;
-    @media (max-width: 992px) {
-      order: 1;
-      padding-top: 30px;
-      padding-left: 30px;
-    }
-    &__title {
-      font-family: var(--second-family);
-      font-weight: 600;
-      font-size: 34px;
-      letter-spacing: 0.02em;
-      color: #333;
-    }
-    &__submit {
-      padding-right: 100px;
-      &__buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 100%;
-        margin: 50px 0;
-      }
-      &__divider {
-        display: flex;
-        gap: 24px;
-        align-items: center;
-        &__text {
-          font-weight: 400;
-          font-size: 18px;
-          color: #666;
-          text-transform: uppercase;
-        }
-      }
-      &__inputs {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        margin-top: 50px;
-        &__sign {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          font-weight: 400;
-          font-size: 16px;
-          color: #3c4242;
-          a {
-            display: inline-block;
-          }
-          &_uderline {
-            text-decoration: underline;
-            text-decoration-skip-ink: none;
-          }
-        }
-        &__hide {
-          display: flex;
-          gap: 15px;
-          font-weight: 400;
-          font-size: 18px;
-          text-align: right;
-          color: #807d7e;
-          cursor: pointer;
-        }
-        &__forgot {
-          font-weight: 400;
-          font-size: 16px;
-          text-decoration: underline;
-          text-decoration-skip-ink: none;
-          text-align: right;
-          color: #3c4242;
-          text-decoration: underline;
-          display: block;
-          text-align: end;
-          margin-top: 10px;
-          @media (max-width: 992px) {
-            text-align: start;
-          }
-        }
-      }
-    }
-  }
-}
-.divider {
-  height: 2px;
-  background: rgba(102, 102, 102, 0.25);
-  width: 100%;
-}
+<style lang="scss">
+@import url('../assets/sign.scss');
+// .sign-in {
+//   display: flex;
+//   gap: 70px;
+//   @media (max-width: 992px) {
+//     flex-direction: column;
+//   }
+//   &__image {
+//     img {
+//       @media (max-width: 767px) {
+//         display: none;
+//       }
+//     }
+//     @media (max-width: 992px) {
+//       order: 2;
+//     }
+//   }
+//   &__form {
+//     padding-top: 60px;
+//     flex-grow: 1;
+//     @media (max-width: 992px) {
+//       order: 1;
+//       padding-top: 30px;
+//       padding-left: 30px;
+//     }
+//     &__title {
+//       font-family: var(--second-family);
+//       font-weight: 600;
+//       font-size: 34px;
+//       letter-spacing: 0.02em;
+//       color: #333;
+//     }
+//     &__submit {
+//       padding-right: 100px;
+//       &__buttons {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 20px;
+//         width: 100%;
+//         margin: 50px 0;
+//       }
+//       &__divider {
+//         display: flex;
+//         gap: 24px;
+//         align-items: center;
+//         &__text {
+//           font-weight: 400;
+//           font-size: 18px;
+//           color: #666;
+//           text-transform: uppercase;
+//         }
+//       }
+//       &__inputs {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 30px;
+//         margin-top: 50px;
+//         &__sign {
+//           display: flex;
+//           flex-direction: column;
+//           gap: 10px;
+//           font-weight: 400;
+//           font-size: 16px;
+//           color: #3c4242;
+//           a {
+//             display: inline-block;
+//           }
+//           &_uderline {
+//             text-decoration: underline;
+//             text-decoration-skip-ink: none;
+//           }
+//         }
+//         &__hide {
+//           display: flex;
+//           gap: 15px;
+//           font-weight: 400;
+//           font-size: 18px;
+//           text-align: right;
+//           color: #807d7e;
+//           cursor: pointer;
+//         }
+//         &__forgot {
+//           font-weight: 400;
+//           font-size: 16px;
+//           text-decoration: underline;
+//           text-decoration-skip-ink: none;
+//           text-align: right;
+//           color: #3c4242;
+//           text-decoration: underline;
+//           display: block;
+//           text-align: end;
+//           margin-top: 10px;
+//           @media (max-width: 992px) {
+//             text-align: start;
+//           }
+//         }
+//       }
+//       &__description {
+//         font-weight: 400;
+// font-size: 16px;
+// line-height: 125%;
+// color: #676b80;   
+// span {
+//   display: block;
+// }
+// &_error {
+//   color: #ee1d52;
+// }
+//       }
+//     }
+//   }
+// }
+// .divider {
+//   height: 2px;
+//   background: rgba(102, 102, 102, 0.25);
+//   width: 100%;
+// }
 </style>
