@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import MainPage from '../views/MainPage.vue'
 import SignIn from '../views/SignIn.vue'
+import SignUp from '../views/SignUp.vue'
 import HeaderSign from '../components/HeaderSign.vue'
 import HeaderTop from '../components/HeaderTop.vue'
 import Footer from '../components/Footer.vue'
@@ -24,6 +25,13 @@ const router = createRouter({
             components: {
                 header: HeaderSign,
                 main: SignIn
+            }
+        },
+        {
+            path: '/signup',
+            components: {
+                header: HeaderSign,
+                main: SignUp
             }
         },
         {

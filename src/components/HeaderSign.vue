@@ -24,7 +24,7 @@
             <Button label="Login" />
         </router-link>
        
-        <router-link to="/sign-up">
+        <router-link to="/signup">
   <Button label="Sign Up" color="secondary" />
         </router-link>
       

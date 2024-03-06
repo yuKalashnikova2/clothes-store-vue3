@@ -14,6 +14,9 @@ const props = defineProps({
     type: String,
     default: 'primary',
   },
+  disabled: {
+    type: Boolean,
+  }
 })
 
 const btnStyleSize = computed ((size) =>  {
@@ -31,7 +34,7 @@ const btnStyleSize = computed ((size) =>  {
 
 </script>
 <template>
-  <button :class="['button',color === 'secondary' ? 'button_secondary' : 'button', size === 'medium' ? 'button_medium' : 'button']">
+  <button :class="['button',color === 'secondary' ? 'button_secondary' : 'button', size === 'medium' ? 'button_medium' : 'button', disabled ? 'button__disabled' : '']">
     <slot></slot>
   {{ label }}</button>
 </template>
@@ -55,7 +58,17 @@ const btnStyleSize = computed ((size) =>  {
     background: #8a33fd;
     opacity: 0.9;
   }
- 
+  &.button__disabled {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.1);
+  background: #eaeaea;
+  color: #807d7e;
+  border: 1px solid #eaeaea;
+  &:hover {
+      background: #eaeaea;
+      opacity: 1;
+      cursor: auto;
+    }
+ }
   &_secondary {
     color: #8a33fd;
     background: #fff;
