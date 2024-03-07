@@ -1,5 +1,5 @@
 <script setup>
-import { useProductsStore } from '../stores/index.js'
+import { useProductsStore } from '../../stores/index.js'
 const store = useProductsStore()
 const props = defineProps({
   title: {

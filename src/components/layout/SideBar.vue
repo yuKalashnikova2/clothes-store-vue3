@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import SidebarTitle from './SidebarTitle.vue'
-import { useProductsStore } from '../stores/index.js'
+import { useProductsStore } from '../../stores/index.js'
 const store = useProductsStore()
 
+import SidebarSizeItem from './SidebarSizeItem.vue'
+import SidebarColorItem from './SidebarColorItem.vue'
 const categoriesClothes = ref([
   'Jeans',
   'Payjamas',
@@ -30,6 +32,7 @@ const colors = ref([
   'Gray',
 ])
 
+const sizes = ref(['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'])
 const min = ref(0)
 const max = ref(100)
 const firstValue = ref(25)
@@ -46,42 +49,6 @@ const updateSecondValue = (value) => {
 const updateRange = () => {
   min.value = firstValue.value
   max.value = secondValue.value
-}
-
-const getColorClass = (color) => {
-  if (color === 'Red') {
-    return 'sidebar__colors__item__decor_bg-red'
-  }
-  if (color === 'Blue') {
-    return 'sidebar__colors__item__decor_bg-blue'
-  }
-  if (color === 'Black') {
-    return 'sidebar__colors__item__decor_bg-black'
-  }
-  if (color === 'White') {
-    return 'sidebar__colors__item__decor_bg-white'
-  }
-  if (color === 'Green') {
-    return 'sidebar__colors__item__decor_bg-green'
-  }
-  if (color === 'Yellow') {
-    return 'sidebar__colors__item__decor_bg-yellow'
-  }
-  if (color === 'Navy') {
-    return 'sidebar__colors__item__decor_bg-navy'
-  }
-  if (color === 'Purple') {
-    return 'sidebar__colors__item__decor_bg-purple'
-  }
-  if (color === 'Orange') {
-    return 'sidebar__colors__item__decor_bg-orange'
-  }
-  if (color === 'Gray') {
-    return 'sidebar__colors__item__decor_bg-gray'
-  }
-  if (color === 'Pink') {
-    return 'sidebar__colors__item__decor_bg-pink'
-  }
 }
 </script>
 
@@ -142,12 +109,7 @@ const getColorClass = (color) => {
       icon="arrow-up-colors"
     />
     <div class="sidebar__colors animation-visible" v-if="store.isVisibleColors">
-      <div class="sidebar__colors__item" v-for="color in colors" :key="color">
-        <div
-          :class="['sidebar__colors__item__decor', getColorClass(color)]"
-        ></div>
-        <span>{{ color }}</span>
-      </div>
+      <SidebarColorItem v-for="color in colors" :key="color" :color="color" />
     </div>
 
     <SidebarTitle
@@ -156,15 +118,7 @@ const getColorClass = (color) => {
       icon="arrow-up-sizes"
     />
     <div class="sidebar__size animation-visible" v-if="store.isVisibleSize">
-      <div class="sidebar__size__item">XXS</div>
-      <div class="sidebar__size__item">XS</div>
-      <div class="sidebar__size__item">S</div>
-      <div class="sidebar__size__item">M</div>
-      <div class="sidebar__size__item">L</div>
-      <div class="sidebar__size__item">XL</div>
-      <div class="sidebar__size__item">XXL</div>
-      <div class="sidebar__size__item">3XL</div>
-      <div class="sidebar__size__item">4XL</div>
+      <SidebarSizeItem v-for="size in sizes" :key="size" :size="size" />
     </div>
   </div>
 </template>
@@ -225,66 +179,6 @@ const getColorClass = (color) => {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 18px;
-    &__item {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      align-items: center;
-      & span {
-        font-weight: 600;
-        font-size: 14px;
-        color: #8a8989;
-      }
-      &__decor {
-        border-radius: 12px;
-        width: 36px;
-        height: 36px;
-
-        &_bg-purple {
-          background: #8434e1;
-        }
-        &_bg-black {
-          background: #252525;
-        }
-        &_bg-red {
-          background: #f35528;
-        }
-        &_bg-orange {
-          background: #f16f2b;
-        }
-        &_bg-navy {
-          background: #345eff;
-        }
-        &_bg-white {
-          background: #fff;
-          border: 0.97px solid #f4f1f1;
-          box-sizing: border-box;
-        }
-        &_bg-brown {
-          background: #d67e3b;
-        }
-        &_bg-green {
-          background: #48bc4e;
-        }
-        &_bg-yellow {
-          background: #fdc761;
-        }
-        &_bg-gray {
-          background: #e4e5e8;
-        }
-        &_bg-pink {
-          background: #e08d9d;
-        }
-
-        &_bg-blue {
-          background: #3fdeff;
-        }
-      }
-      &:hover {
-        cursor: pointer;
-        opacity: 0.8;
-      }
-    }
   }
   &__size {
     padding: 40px 34px;
@@ -292,21 +186,6 @@ const getColorClass = (color) => {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     box-sizing: border-box;
-    &__item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 14px;
-      color: #3c4242;
-      padding: 8px 22px;
-      border: 1px solid rgba(190, 188, 189, 0.8);
-      border-radius: 8px;
-      &:hover {
-        background: rgba(190, 188, 189, 0.1);
-        cursor: pointer;
-      }
-    }
   }
 }
 
