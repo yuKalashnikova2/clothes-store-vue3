@@ -30,9 +30,9 @@ ul li {
   list-style: none;
 }
 
-input {
+/* input {
   all: unset;
-}
+} */
 
 select {
   outline: none;

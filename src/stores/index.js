@@ -11,6 +11,11 @@ import {
 export const useProductsStore = defineStore('products', () => {
     const productsMen = vueRef([])
     const storage = getStorage()
+
+    const isVisibleCategories = ref(false)
+    const isVisiblePrice = ref(false)
+    const isVisibleColors = ref(false)
+    const isVisibleSize = ref(false)
     const fetchFilesFromFirebase = async () => {
       try {
         const listRef = ref(storage, 'men/')
@@ -33,5 +38,9 @@ export const useProductsStore = defineStore('products', () => {
   })
 
   
-    return { productsMen, fetchFilesFromFirebase }
+    return { productsMen, fetchFilesFromFirebase, isVisibleCategories,
+      isVisiblePrice,
+      isVisibleColors,
+      isVisibleSize
+     }
   })
