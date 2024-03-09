@@ -9,11 +9,11 @@
         <li class="header__details__item">Shop</li>
       </router-link>
 
-      <router-link to="/">
+      <router-link to="/shopmen">
         <li class="header__details__item">Men</li>
       </router-link>
 
-      <router-link to="/">
+      <router-link to="/shopwomen">
         <li class="header__details__item">Women</li>
       </router-link>
 

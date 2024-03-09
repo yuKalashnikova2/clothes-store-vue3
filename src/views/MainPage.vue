@@ -6,7 +6,7 @@ import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
 import WidgetCardList from '../components/WidgetCardList.vue'
 import CardCategories from '../components/CardCategories.vue'
-import CardTitle from '../components/CardTitle.vue'
+import Title from '../components/Title.vue'
 import { useProductsStore } from '../stores/index.js'
 import TopBrandsDeal from '../components/TopBrandsDeal.vue'
 import FeedbacCard from '../components/FeedbacCard.vue'
@@ -46,21 +46,21 @@ const store = useProductsStore()
 
       <div class="content__decor">
         <div>
-          <CardTitle title="Categories For Men" />
+          <Title title="Categories For Men" />
           <div class="card__list">
             <CardCategories :productsMen="store.productsMen" />
           </div>
         </div>
 
         <div>
-          <CardTitle title="Categories For Women" />
+          <Title title="Categories For Women" />
         </div>
       </div>
 
       <TopBrandsDeal />
 
       <div class="content_margin_135">
-        <CardTitle title="Feedback" />
+        <Title title="Feedback" />
         <swiper :modules="[Pagination]" :pagination="true">
           <SwiperSlide class="content__feedback">
             <FeedbacCard />
