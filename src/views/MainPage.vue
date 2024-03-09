@@ -4,8 +4,8 @@ import { Pagination } from 'swiper/modules'
 
 import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
-import ContentCardList from '../components/ContentCardList.vue'
-import CardProduct from '../components/CardProduct.vue'
+import WidgetCardList from '../components/WidgetCardList.vue'
+import CardCategories from '../components/CardCategories.vue'
 import CardTitle from '../components/CardTitle.vue'
 import { useProductsStore } from '../stores/index.js'
 import TopBrandsDeal from '../components/TopBrandsDeal.vue'
@@ -21,7 +21,7 @@ const store = useProductsStore()
     <Banner />
 
     <div class="content">
-      <ContentCardList />
+      <WidgetCardList />
 
       <div class="content__info">
         <div class="content__info__text">
@@ -48,7 +48,7 @@ const store = useProductsStore()
         <div>
           <CardTitle title="Categories For Men" />
           <div class="card__list">
-            <CardProduct :productsMen="store.productsMen" />
+            <CardCategories :productsMen="store.productsMen" />
           </div>
         </div>
 

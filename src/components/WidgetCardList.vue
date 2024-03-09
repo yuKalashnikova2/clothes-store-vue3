@@ -1,16 +1,16 @@
 <script setup>
-import ContentCard from './ContentCard.vue'
+import WidgetCard from './WidgetCard.vue'
 </script>
 <template>
   <div class="content__card__list">
-    <ContentCard
+    <WidgetCard
       title="High Coziness"
       subtitle="Low Price"
       percent="UPTO 50% OFF"
       subtitle-two="Explore Items"
       image="content/content-1.png"
     />
-    <ContentCard
+    <WidgetCard
       title="Breezy Summer Style"
       subtitle="Beyoung Presents"
       percent="UPTO 50% OFF"
