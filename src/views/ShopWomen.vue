@@ -1,12 +1,13 @@
 <script setup>
 import SideBar from '../components/layout/SideBar.vue'
+import ProductCardCatalog from '../components/ProductCardCatalog.vue';
 </script>
 
 <template>
     <div class="shop">
         <SideBar />
         <div class="shop__content">
-            Карточки
+          <ProductCardCatalog />
         </div>
     </div>
 </template>

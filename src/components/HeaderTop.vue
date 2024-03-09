@@ -1,3 +1,5 @@
+<script setup>
+</script>
 <template>
   <header class="header">
     <router-link to="/">
@@ -33,7 +35,7 @@
 
     <div class="header__icons">
       <router-link to="/favorites" class="header__icons__item">
-        <img src="/heart.svg" alt="favorite" />
+        <img src="/heart/heart.svg" alt="favorite" />
       </router-link>
 
       <router-link to="/user" class="header__icons__item">
