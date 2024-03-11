@@ -6,6 +6,7 @@ const store = useProductsStore()
 
 import SidebarSizeItem from './SidebarSizeItem.vue'
 import SidebarColorItem from './SidebarColorItem.vue'
+import InputDubbleRange from './InputDubbleRange.vue'
 const categoriesClothes = ref([
   'Jeans',
   'Payjamas',
@@ -33,23 +34,7 @@ const colors = ref([
 ])
 
 const sizes = ref(['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'])
-const min = ref(0)
-const max = ref(100)
-const firstValue = ref(25)
 
-const secondValue = ref(75)
-
-const updateFirstValue = (value) => {
-  firstValue.value = value
-}
-const updateSecondValue = (value) => {
-  secondValue.value = value
-}
-
-const updateRange = () => {
-  min.value = firstValue.value
-  max.value = secondValue.value
-}
 </script>
 
 <template>
@@ -79,29 +64,10 @@ const updateRange = () => {
       title="Price"
       icon="arrow-up-prices"
     />
-
-    <div class="sidebar__price animation-visible" v-if="store.isVisiblePrice">
-      <div class="range-slider">
-        <input
-          type="range"
-          :value="firstValue"
-          :min="min"
-          :max="max"
-          @input="updateFirstValue($event.target.value)"
-        />
-        <input
-          type="range"
-          :value="secondValue"
-          :min="min"
-          :max="max"
-          @input="updateSecondValue($event.target.value)"
-        />
-      </div>
-      <div class="sidebar__price__text">
-        <div>${{ firstValue }}</div>
-        <div>${{ secondValue }}</div>
-      </div>
+    <div class=" animation-visible" v-if="store.isVisiblePrice">
+      <InputDubbleRange />
     </div>
+  
 
     <SidebarTitle
       @click="store.isVisibleColors = !store.isVisibleColors"
@@ -156,23 +122,7 @@ const updateRange = () => {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    &__text {
-      display: flex;
-      gap: 30px;
-      & div {
-        font-weight: 500;
-        font-size: 16px;
-        color: #3c4242;
-        border: 1px solid rgba(190, 188, 189, 0.8);
-        border-radius: 8px;
-        opacity: 0.8;
-        padding: 7px 30px;
-        &:hover {
-          background: rgba(190, 188, 189, 0.1);
-          cursor: pointer;
-        }
-      }
-    }
+
   }
   &__colors {
     padding: 40px 34px;
@@ -187,26 +137,11 @@ const updateRange = () => {
     gap: 20px;
     box-sizing: border-box;
   }
+
+
 }
 
-.range-slider {
-  width: 200px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  & input {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    &::-webkit-slider-thumb {
-      z-index: 2;
-      position: relative;
-      top: 2px;
-      margin-top: -7px;
-    }
-  }
-}
+
 .animation-visible {
   animation: slideInFromTop 1s ease forwards;
 
@@ -219,4 +154,6 @@ const updateRange = () => {
     }
   }
 }
+
+
 </style>
