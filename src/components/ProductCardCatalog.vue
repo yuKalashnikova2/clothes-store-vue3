@@ -4,7 +4,16 @@ import ProductCard from './ProductCard.vue';
 
 <template>
     <div class="product__card__catalog">
-        <ProductCard v-for="i in 12" :key="i" />
+        <div  v-for="i in 12" :key="i" i="i">
+             <router-link :to="'/fullcardproduct/' + i"> 
+                 <ProductCard  />
+                 </router-link>
+        </div>
+      
+            <!-- <ProductCard v-for="i in 12" :key="i" i="i">
+            </ProductCard>
+       -->
+       
     </div>
 </template>
 

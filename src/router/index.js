@@ -9,6 +9,7 @@ import Footer from '../components/Footer.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import NewPassword from '../views/NewPassword.vue'
 import ShopWomen from '../views/ShopWomen.vue'
+import FullCardProduct from '../views/FullCardProduct.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -56,6 +57,14 @@ const router = createRouter({
                 main: ShopWomen,
                 footer: Footer
             }
+        },
+        {
+            path: '/fullcardproduct/:idcard',
+            components: {
+                header: HeaderTop,
+                main: FullCardProduct,
+                footer: Footer
+            },
         }
     ]
 })
