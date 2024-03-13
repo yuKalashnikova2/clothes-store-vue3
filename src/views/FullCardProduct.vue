@@ -2,41 +2,16 @@
 import { ref } from 'vue'
 import Button from '../components/Button.vue'
 import Title from '../components/Title.vue'
+
+import FullCardSlider from '../components/FullCard/FullCardSlider.vue';
 const picked = ref('Black')
 </script>
 
 <template>
   <div class="full-card">
     <div class="full-card__image">
-      <div class="full-card__image__slider">
-        <div class="full-card__image__slider__items">
-          <div class="full-card__image__slider__items__item">
-            <img src="/product.png" alt="product" />
-          </div>
-          <div
-            class="full-card__image__slider__items__item full-card__image__slider__items__item_active"
-          >
-            <img src="/ex.png" alt="product" />
-          </div>
 
-          <div class="full-card__image__slider__items__item">
-            <img src="/ex.png" alt="product" />
-          </div>
-        </div>
-
-        <div class="full-card__image__slider__arrows">
-          <div
-            class="full-card__image__slider__arrows__item full-card__image__slider__arrows__item_white"
-          >
-            <img src="/arrows-slider-card/arrow-black.svg" alt="arrow" />
-          </div>
-          <div
-            class="full-card__image__slider__arrows__item full-card__image__slider__arrows__item_black"
-          >
-            <img src="/arrows-slider-card/arrow-white.svg" alt="arrow" />
-          </div>
-        </div>
-      </div>
+      <FullCardSlider />
       <div class="full-card__image__photo">
         <img src="/product.png" alt="photo" />
       </div>
@@ -180,73 +155,6 @@ const picked = ref('Black')
     @media (max-width: 992px) {
       padding-left: 30px;
       flex-direction: column;
-    }
-    &__slider {
-      max-width: 75px;
-      max-height: 335px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      @media (max-width: 992px) {
-        max-width: none;
-        max-height: none;
-        padding-top: 15px;
-      }
-      &__items {
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        @media (max-width: 992px) {
-          flex-direction: row;
-        }
-        &__item {
-          & img {
-            width: 68px;
-            height: 68px;
-            border-radius: 9px;
-            padding: 5px;
-            @media (max-width: 992px) {
-              width: 88px;
-              height: 88px;
-            }
-          }
-          &_active {
-            border: 1px solid #3c4242;
-            border-radius: 9px;
-          }
-        }
-      }
-      &__arrows {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        align-items: center;
-        justify-content: center;
-        @media (max-width: 992px) {
-          display: none;
-        }
-        &__item {
-          cursor: pointer;
-          width: 22px;
-          height: 22px;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          &_white {
-            background: white;
-            &:hover {
-              background: #c3c5c5;
-            }
-          }
-          &_black {
-            background: #3c4242;
-            &:hover {
-              opacity: 0.6;
-            }
-          }
-        }
-      }
     }
     &__photo {
       min-width: 520px;
