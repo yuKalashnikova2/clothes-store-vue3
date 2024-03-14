@@ -6,7 +6,7 @@ import Title from '../components/Title.vue'
 
 import FullCardSlider from '../components/FullCard/FullCardSlider.vue'
 import FullCardTable from '../components/FullCard/FullCardTable.vue'
-const picked = ref('Black')
+import FullCardColors from '../components/FullCard/FullCardColors.vue'
 
 const store = useFullCardStore()
 
@@ -39,36 +39,7 @@ const store = useFullCardStore()
           </div>
         </div>
 
-        <div class="full-card__description__colors">
-          <span class="full-card__description__info__title"
-            >Colors Available
-          </span>
-          <div class="full-card__description__colors__list">
-            <div class="full-card__description__colors__list__item_active">
-              <div class="full-card__description__colors__list__item">
-                <input type="radio" id="one" value="Black" v-model="picked" />
-              </div>
-            </div>
-
-            <div
-              class="full-card__description__colors__list__item full-card__description__colors__list__item_bg-yellow"
-            >
-              <input type="radio" id="two" value="Yellow" v-model="picked" />
-            </div>
-
-            <div
-              class="full-card__description__colors__list__item full-card__description__colors__list__item_bg-pink"
-            >
-              <input type="radio" id="two" value="Pink" v-model="picked" />
-            </div>
-
-            <div
-              class="full-card__description__colors__list__item full-card__description__colors__list__item_bg-red"
-            >
-              <input type="radio" id="two" value="Red" v-model="picked" />
-            </div>
-          </div>
-        </div>
+        <FullCardColors />
 
         <div class="full-card__description__buttons">
           <Button label="Add To Cart" />
@@ -188,13 +159,13 @@ const store = useFullCardStore()
       display: flex;
       flex-direction: column;
       gap: 30px;
-      &__title {
-        display: block;
-        font-weight: 600;
-        font-size: 18px;
-        color: #3f4646;
-        margin-bottom: 25px;
-      }
+      // &__title {
+      //   display: block;
+      //   font-weight: 600;
+      //   font-size: 18px;
+      //   color: #3f4646;
+      //   margin-bottom: 25px;
+      // }
     }
     &__size {
       &__list {
@@ -216,32 +187,32 @@ const store = useFullCardStore()
         }
       }
     }
-    &__colors {
-      &__list {
-        display: flex;
-        gap: 20px;
-        &__item {
-          width: 22px;
-          height: 22px;
-          margin: 4px;
-          border-radius: 50%;
-          background: #3c4242;
-          &_bg-yellow {
-            background: #edd146;
-          }
-          &_bg-pink {
-            background: #eb84b0;
-          }
-          &_bg-red {
-            background: #9c1f35;
-          }
-          &_active {
-            border: 1px solid #3c4242;
-            border-radius: 50%;
-          }
-        }
-      }
-    }
+    // &__colors {
+    //   &__list {
+    //     display: flex;
+    //     gap: 20px;
+    //     &__item {
+    //       width: 22px;
+    //       height: 22px;
+    //       margin: 4px;
+    //       border-radius: 50%;
+    //       background: #3c4242;
+    //       &_bg-yellow {
+    //         background: #edd146;
+    //       }
+    //       &_bg-pink {
+    //         background: #eb84b0;
+    //       }
+    //       &_bg-red {
+    //         background: #9c1f35;
+    //       }
+    //       &_active {
+    //         border: 1px solid #3c4242;
+    //         border-radius: 50%;
+    //       }
+    //     }
+    //   }
+    // }
     &__buttons {
       display: flex;
       gap: 25px;
