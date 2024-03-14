@@ -7,6 +7,7 @@ import Title from '../components/Title.vue'
 import FullCardSlider from '../components/FullCard/FullCardSlider.vue'
 import FullCardTable from '../components/FullCard/FullCardTable.vue'
 import FullCardColors from '../components/FullCard/FullCardColors.vue'
+import FullCardSize from '../components/FullCard/FullCardSize.vue'
 
 const store = useFullCardStore()
 
@@ -27,17 +28,8 @@ const store = useFullCardStore()
         <h1 class="full-card__description__title">
           Raven Hoodie With Black colored Design
         </h1>
-
-        <div class="full-card__description__size">
-          <span class="full-card__description__info__title">Select size</span>
-          <div class="full-card__description__size__list">
-            <div class="full-card__description__size__list__item">XS</div>
-            <div class="full-card__description__size__list__item">S</div>
-            <div class="full-card__description__size__list__item">M</div>
-            <div class="full-card__description__size__list__item">L</div>
-            <div class="full-card__description__size__list__item">XL</div>
-          </div>
-        </div>
+        <FullCardSize />
+  
 
         <FullCardColors />
 
@@ -159,60 +151,9 @@ const store = useFullCardStore()
       display: flex;
       flex-direction: column;
       gap: 30px;
-      // &__title {
-      //   display: block;
-      //   font-weight: 600;
-      //   font-size: 18px;
-      //   color: #3f4646;
-      //   margin-bottom: 25px;
-      // }
     }
-    &__size {
-      &__list {
-        display: flex;
-        gap: 20px;
-        &__item {
-          min-width: 38px;
-          font-weight: 500;
-          font-size: 14px;
-          text-align: center;
-          color: #3c4242;
-          border: 1.5px solid #bebcbd;
-          border-radius: 12px;
-          padding: 9px 10px;
-          cursor: pointer;
-          &:hover {
-            background: rgba(190, 188, 189, 0.1);
-          }
-        }
-      }
-    }
-    // &__colors {
-    //   &__list {
-    //     display: flex;
-    //     gap: 20px;
-    //     &__item {
-    //       width: 22px;
-    //       height: 22px;
-    //       margin: 4px;
-    //       border-radius: 50%;
-    //       background: #3c4242;
-    //       &_bg-yellow {
-    //         background: #edd146;
-    //       }
-    //       &_bg-pink {
-    //         background: #eb84b0;
-    //       }
-    //       &_bg-red {
-    //         background: #9c1f35;
-    //       }
-    //       &_active {
-    //         border: 1px solid #3c4242;
-    //         border-radius: 50%;
-    //       }
-    //     }
-    //   }
-    // }
+
+
     &__buttons {
       display: flex;
       gap: 25px;

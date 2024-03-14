@@ -48,6 +48,8 @@ export const useFullCardStore = defineStore('fullcard', () => {
         choiceColors.value = color;
       };
   
+      const size = ref(['XS', 'S', 'M', 'L', 'XL'])
+      const currentSize = ref(size.value[0])
       const prevStep = () => {
         currentIndex.value =
           (currentIndex.value - 1 + images.value.length) % images.value.length
@@ -57,5 +59,5 @@ export const useFullCardStore = defineStore('fullcard', () => {
         currentIndex.value = (currentIndex.value + 1) % images.value.length
       }
 
-    return { tableInfo, images, currentIndex, prevStep, nextStep, choiceColors, colors, selectColor }
+    return { tableInfo, images, currentIndex, prevStep, nextStep, choiceColors, colors, selectColor, size, currentSize }
 })
