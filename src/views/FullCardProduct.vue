@@ -1,10 +1,15 @@
 <script setup>
 import { ref } from 'vue'
+import { useFullCardStore } from '../stores/fullcard.js'
 import Button from '../components/Button.vue'
 import Title from '../components/Title.vue'
 
-import FullCardSlider from '../components/FullCard/FullCardSlider.vue';
+import FullCardSlider from '../components/FullCard/FullCardSlider.vue'
+import FullCardTable from '../components/FullCard/FullCardTable.vue'
 const picked = ref('Black')
+
+const store = useFullCardStore()
+
 </script>
 
 <template>
@@ -13,7 +18,7 @@ const picked = ref('Black')
 
       <FullCardSlider />
       <div class="full-card__image__photo">
-        <img src="/product.png" alt="photo" />
+        <img :src="store.images[store.currentIndex]" alt="photo" />
       </div>
     </div>
 
@@ -116,16 +121,8 @@ const picked = ref('Black')
           Provide all-time comfort. Anytime, anywhere. Infinite range of
           matte-finish HD prints.
         </p>
-        <div class="full-card__info__main__table">
-          <div class="full-card__info__main__table__item" v-for="i in 6">
-            <span class="full-card__info__main__table__item__title"
-              >Fabric</span
-            >
-            <span class="full-card__info__main__table__item__description"
-              >Bio-washed Cotton</span
-            >
-          </div>
-        </div>
+
+        <FullCardTable />
       </div>
 
       <div class="full-card__info__video">
@@ -153,14 +150,20 @@ const picked = ref('Black')
     justify-content: center;
     align-items: center;
     @media (max-width: 992px) {
-      padding-left: 30px;
+      padding-left: 0;
       flex-direction: column;
     }
     &__photo {
-      min-width: 520px;
+     width: 520px;
+      height: 785px;
+      overflow: hidden;
+      @media (max-width: 992px) {
+        width: 100%;
+      }
       & img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
       }
     }
   }
@@ -304,68 +307,6 @@ const picked = ref('Black')
       line-height: 156%;
       letter-spacing: 0.02em;
       color: #807d7e;
-    }
-    &__table {
-      background: #f6f6f6;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-radius: 12px;
-      margin-top: 32px;
-      &__item {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 17px 50px;
-        position: relative;
-
-        &:nth-child(-n + 3) {
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            border-bottom: 1px solid #bebcbd;
-          }
-        }
-
-        &:nth-child(3n + 1) {
-          &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 100%;
-            border-right: 1px solid #bebcbd;
-          }
-        }
-
-        &:nth-child(3n + 2) {
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            height: 100%;
-            border-right: 1px solid #bebcbd; /* внутренний бордер справа для второго столбца */
-          }
-        }
-
-        &__title {
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 100%;
-          letter-spacing: 0.02em;
-          color: #807d7e;
-        }
-        &__description {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 100%;
-          letter-spacing: 0.02em;
-          color: #3c4242;
-        }
-      }
     }
   }
   &__video {

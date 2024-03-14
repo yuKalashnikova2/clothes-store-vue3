@@ -1,61 +1,42 @@
 <script setup>
-import { ref } from 'vue'
-const images = ref([
-  '/product.png',
-  '/ex.png',
-  '/reset-password.png',
-  '/product.png',
-  '/ex.png',
-  '/reset-password.png',
-  '/product.png',
-  '/ex.png',
-  '/reset-password.png',
-])
-const currentIndex = ref(0)
+import { useFullCardStore } from '../../stores/fullcard.js'
 
-const prevStep = () => {
-  currentIndex.value =
-    (currentIndex.value - 1 + images.value.length) % images.value.length
-}
-
-const nextStep = () => {
-  currentIndex.value = (currentIndex.value + 1) % images.value.length
-}
+const store = useFullCardStore()
 </script>
 
 <template>
-  <div class="full-card__image__slider">
-    <div class="full-card__image__slider__items">
-      <div class="full-card__image__slider__items__item">
-        <img :src="images[currentIndex - 1]" v-if="currentIndex > 0" />
-        <img :src="images[0]" alt="" v-else />
+  <div class="slider">
+    <div class="slider__items">
+      <div class="slider__items__item">
+        <img :src="store.images[store.currentIndex - 1]" v-if="store.currentIndex > 0" />
+        <img :src="store.images[0]" alt="" v-else />
       </div>
 
       <div
-        class="full-card__image__slider__items__item full-card__image__slider__items__item__current"
+        class="slider__items__item slider__items__item__current"
       >
-        <img :src="images[currentIndex]" />
+        <img :src="store.images[store.currentIndex]" />
       </div>
 
-      <div class="full-card__image__slider__items__item">
+      <div class="slider__items__item">
         <img
-          :src="images[currentIndex + 1]"
-          v-if="currentIndex < images.length - 1"
+          :src="store.images[store.currentIndex + 1]"
+          v-if="store.currentIndex < store.images.length - 1"
         />
-        <img :src="images[images.length - 1]" alt="" v-else />
+        <img :src="store.images[store.images.length - 1]" alt="" v-else />
       </div>
     </div>
 
-    <div class="full-card__image__slider__arrows">
+    <div class="slider__arrows">
       <div
-        class="full-card__image__slider__arrows__item full-card__image__slider__arrows__item_white"
-        @click="prevStep"
+        class="slider__arrows__item slider__arrows__item_white"
+        @click="store.prevStep"
       >
         <img src="/arrows-slider-card/arrow-black.svg" alt="arrow" />
       </div>
       <div
-        class="full-card__image__slider__arrows__item full-card__image__slider__arrows__item_black"
-        @click="nextStep"
+        class="slider__arrows__item slider__arrows__item_black"
+        @click="store.nextStep"
       >
         <img src="/arrows-slider-card/arrow-white.svg" alt="arrow" />
       </div>
@@ -64,7 +45,10 @@ const nextStep = () => {
 </template>
 
 <style lang="scss">
-.full-card__image__slider {
+.slider {
+  @media (max-width: 992px) {
+      padding-top: 20px;
+    }
   &__items {
     display: flex;
     flex-direction: column;
@@ -73,12 +57,15 @@ const nextStep = () => {
     transition: all 0.5s ease-in-out;
     @media (max-width: 992px) {
       flex-direction: row;
+      width: auto;
     }
     &__item {
       border: 2px solid transparent;
       height: 68px;
       transition: transform 0.5s;
-
+      @media (max-width: 992px) {
+      height: auto;
+    }
       & img {
         object-fit: cover;
         width: 100%;
@@ -105,7 +92,7 @@ const nextStep = () => {
     justify-content: center;
     margin-top: 24px;
     @media (max-width: 992px) {
-      display: none;
+     flex-direction: row;
     }
     &__item {
       cursor: pointer;
@@ -115,16 +102,26 @@ const nextStep = () => {
       display: flex;
       justify-content: center;
       align-items: center;
+      @media (max-width: 992px) {
+        width: 44px;
+        height: 44px;
+      }
       &_white {
         background: white;
         &:hover {
           background: #c3c5c5;
+        }
+        @media (max-width: 992px) {
+          transform: rotate(270deg);
         }
       }
       &_black {
         background: #3c4242;
         &:hover {
           opacity: 0.6;
+        }
+        @media (max-width: 992px) {
+          transform: rotate(270deg);
         }
       }
     }
