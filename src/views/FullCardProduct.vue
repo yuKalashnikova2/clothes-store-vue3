@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue'
 import { useFullCardStore } from '../stores/fullcard.js'
 import Button from '../components/Button.vue'
 import Title from '../components/Title.vue'
@@ -8,15 +7,13 @@ import FullCardSlider from '../components/FullCard/FullCardSlider.vue'
 import FullCardTable from '../components/FullCard/FullCardTable.vue'
 import FullCardColors from '../components/FullCard/FullCardColors.vue'
 import FullCardSize from '../components/FullCard/FullCardSize.vue'
-
+import FullCardProductDetails from '../components/FullCard/FullCardProductDetails.vue'
 const store = useFullCardStore()
-
 </script>
 
 <template>
   <div class="full-card">
     <div class="full-card__image">
-
       <FullCardSlider />
       <div class="full-card__image__photo">
         <img :src="store.images[store.currentIndex]" alt="photo" />
@@ -29,7 +26,6 @@ const store = useFullCardStore()
           Raven Hoodie With Black colored Design
         </h1>
         <FullCardSize />
-  
 
         <FullCardColors />
 
@@ -40,37 +36,7 @@ const store = useFullCardStore()
       </div>
 
       <div class="full-card__description__divider"></div>
-
-      <div class="full-card__description__product-details">
-        <div class="full-card__description__product-details__item">
-          <div class="full-card__description__product-details__item__icon">
-            <img src="/details-product/credit-card.svg" alt="credit-card" />
-          </div>
-
-          <span>Secure payment</span>
-        </div>
-
-        <div class="full-card__description__product-details__item">
-          <div class="full-card__description__product-details__item__icon">
-            <img src="/details-product/size-fit.svg" alt="size-fit" />
-          </div>
-          <span>Size & Fit</span>
-        </div>
-
-        <div class="full-card__description__product-details__item">
-          <div class="full-card__description__product-details__item__icon">
-            <img src="/details-product/free-shipping.svg" alt="" />
-          </div>
-          <span>Free shipping</span>
-        </div>
-
-        <div class="full-card__description__product-details__item">
-          <div class="full-card__description__product-details__item__icon">
-            <img src="/details-product/truck.svg" alt="" />
-          </div>
-          <span>Free Shipping & Returns</span>
-        </div>
-      </div>
+      <FullCardProductDetails />
     </div>
   </div>
 
@@ -117,7 +83,7 @@ const store = useFullCardStore()
       flex-direction: column;
     }
     &__photo {
-     width: 520px;
+      width: 520px;
       height: 785px;
       overflow: hidden;
       @media (max-width: 992px) {
@@ -153,7 +119,6 @@ const store = useFullCardStore()
       gap: 30px;
     }
 
-
     &__buttons {
       display: flex;
       gap: 25px;
@@ -165,31 +130,6 @@ const store = useFullCardStore()
     &__divider {
       border-bottom: 1px solid #bebcbd;
       width: 100%;
-    }
-    &__product-details {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      margin-top: 35px;
-      &__item {
-        display: flex;
-        gap: 15px;
-        align-items: center;
-        margin-bottom: 20px;
-        &__icon {
-          background: #f6f6f6;
-          border-radius: 50%;
-          width: 44px;
-          height: 44px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        & span {
-          font-weight: 500;
-          font-size: 18px;
-          color: #3c4242;
-        }
-      }
     }
   }
 }

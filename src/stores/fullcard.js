@@ -2,62 +2,93 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useFullCardStore = defineStore('fullcard', () => {
-    const tableInfo = ref([
-        {
-          title: 'Fabric',
-          description: 'Bio-washed Cotton',
-        },
-        {
-          title: 'Pattern',
-          description: 'Printed',
-        },
-        {
-          title: 'Fit',
-          description: 'Regular-fit',
-        },
-        {
-          title: 'Neck',
-          description: 'Round Neck',
-        },
-        {
-          title: 'Sleeve',
-          description: 'Half-sleeves',
-        },
-        {
-          title: 'Style',
-          description: 'Casual Wear',
-        },
-      ])
+  const tableInfo = ref([
+    {
+      title: 'Fabric',
+      description: 'Bio-washed Cotton',
+    },
+    {
+      title: 'Pattern',
+      description: 'Printed',
+    },
+    {
+      title: 'Fit',
+      description: 'Regular-fit',
+    },
+    {
+      title: 'Neck',
+      description: 'Round Neck',
+    },
+    {
+      title: 'Sleeve',
+      description: 'Half-sleeves',
+    },
+    {
+      title: 'Style',
+      description: 'Casual Wear',
+    },
+  ])
 
-      const images = ref([
-        '/product.png',
-        '/ex.png',
-        '/reset-password.png',
-        '/product.png',
-        '/ex.png',
-        '/reset-password.png',
-        '/product.png',
-        '/ex.png',
-        '/reset-password.png',
-      ])
-      const currentIndex = ref(0)
-      
-      const colors = ['black', 'yellow', 'pink', 'red'];
-      const choiceColors = ref('black')
-      const selectColor = (color) => {
-        choiceColors.value = color;
-      };
-  
-      const size = ref(['XS', 'S', 'M', 'L', 'XL'])
-      const currentSize = ref(size.value[0])
-      const prevStep = () => {
-        currentIndex.value =
-          (currentIndex.value - 1 + images.value.length) % images.value.length
-      }
-      
-      const nextStep = () => {
-        currentIndex.value = (currentIndex.value + 1) % images.value.length
-      }
+  const images = ref([
+    '/product.png',
+    '/ex.png',
+    '/reset-password.png',
+    '/product.png',
+    '/ex.png',
+    '/reset-password.png',
+    '/product.png',
+    '/ex.png',
+    '/reset-password.png',
+  ])
+  const currentIndex = ref(0)
 
-    return { tableInfo, images, currentIndex, prevStep, nextStep, choiceColors, colors, selectColor, size, currentSize }
+  const colors = ['black', 'yellow', 'pink', 'red']
+  const choiceColors = ref('black')
+  const selectColor = (color) => {
+    choiceColors.value = color
+  }
+
+  const size = ref(['XS', 'S', 'M', 'L', 'XL'])
+  const currentSize = ref(size.value[0])
+  const prevStep = () => {
+    currentIndex.value =
+      (currentIndex.value - 1 + images.value.length) % images.value.length
+  }
+
+  const nextStep = () => {
+    currentIndex.value = (currentIndex.value + 1) % images.value.length
+  }
+
+  const productDetails = ref([
+    {
+      name: 'Secure payment',
+      image: 'credit-card',
+    },
+    {
+      name: 'Size & Fit',
+      image: 'size-fit',
+    },
+    {
+      name: 'Free shipping',
+      image: 'free-shipping',
+    },
+    {
+      name: 'Free Shipping & Returns',
+      image: 'truck',
+    },
+  ])
+
+  return {
+    tableInfo,
+    images,
+    currentIndex,
+    prevStep,
+    nextStep,
+    choiceColors,
+    colors,
+    selectColor,
+    size,
+    currentSize,
+    productDetails,
+  }
 })
