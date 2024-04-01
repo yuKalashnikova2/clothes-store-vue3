@@ -10,6 +10,8 @@ import ResetPassword from '../views/ResetPassword.vue'
 import NewPassword from '../views/NewPassword.vue'
 import ShopWomen from '../views/ShopWomen.vue'
 import FullCardProduct from '../views/FullCardProduct.vue'
+import CartPage from '../views/CartPage.vue'
+
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -65,7 +67,15 @@ const router = createRouter({
                 main: FullCardProduct,
                 footer: Footer
             },
-        }
+        },
+        {
+            path: '/cart',
+            components: {
+                header: HeaderTop,
+                main: CartPage,
+                footer: Footer
+            }
+        },
     ]
 })
 
