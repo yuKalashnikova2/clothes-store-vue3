@@ -11,6 +11,8 @@ import NewPassword from '../views/NewPassword.vue'
 import ShopWomen from '../views/ShopWomen.vue'
 import FullCardProduct from '../views/FullCardProduct.vue'
 import CartPage from '../views/CartPage.vue'
+import ErrorPage from '../views/ErrorPage.vue'
+import OrderConfirm from '../views/OrderConfirm.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,6 +75,22 @@ const router = createRouter({
             components: {
                 header: HeaderTop,
                 main: CartPage,
+                footer: Footer
+            }
+        },
+        {
+            path: '/error',
+            components: {
+                header: HeaderTop,
+                main: ErrorPage,
+                footer: Footer
+            }
+        },
+        {
+            path: '/orderconfirmed',
+            components: {
+                header: HeaderTop,
+                main: OrderConfirm,
                 footer: Footer
             }
         },

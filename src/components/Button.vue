@@ -16,6 +16,10 @@ const props = defineProps({
   },
   disabled: {
     type: Boolean,
+  },
+  borderNone: {
+    type: Boolean,
+    default: false,
   }
 })
 
@@ -34,7 +38,8 @@ const btnStyleSize = computed ((size) =>  {
 
 </script>
 <template>
-  <button :class="['button',color === 'secondary' ? 'button_secondary' : 'button', size === 'medium' ? 'button_medium' : 'button', disabled ? 'button__disabled' : '']">
+  <button :class="['button',color === 'secondary' ? 'button_secondary' : 'button', size === 'medium' ? 'button_medium' : 'button', disabled ? 'button__disabled' : '', 
+borderNone ? 'button_border-none' : '']">
     <slot></slot>
   {{ label }}</button>
 </template>
@@ -87,6 +92,9 @@ const btnStyleSize = computed ((size) =>  {
     &:hover {
     background: #f6f6f6;
   }
+  }
+  &_border-none {
+    border-radius: 0;
   }
   @media (max-width: 992px) {
     font-size: 16px;
