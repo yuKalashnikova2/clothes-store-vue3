@@ -1,3 +1,7 @@
+<script setup>
+import Counter from './Counter.vue'
+
+</script>
 <template>
     <div class="cart__item">
         <div class="cart__item__top">
@@ -16,9 +20,7 @@
             $23.00
         </div>
 
-        <div class="cart__item__couenter">
-            + 1 -
-        </div>
+        <Counter />
         <div class="cart__item__shipping">
             Free
         </div>
