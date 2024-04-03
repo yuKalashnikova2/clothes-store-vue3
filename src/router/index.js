@@ -96,7 +96,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/orderconfirmed',
+            path: '/cart/orderconfirmed',
             components: {
                 header: HeaderTop,
                 main: OrderConfirm,

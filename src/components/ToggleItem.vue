@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
     <router-link
         :to="link"
-        :class="['toggle__item', { toggle__item_active: $route.path === link || $route.path === link + '/checkout' }]"
+        :class="['toggle__item', { toggle__item_active: $route.path === link || $route.path === link + '/checkout' || $route.path === link + '/orderconfirmed' }]"
     >
         <svg
             v-if="link === '/favorites'"

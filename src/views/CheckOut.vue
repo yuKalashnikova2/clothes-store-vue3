@@ -110,7 +110,7 @@ const phone = ref('')
                         name="phone"
                     />
                 </div>
-                <router-link to="/orderconfirmed">
+                <router-link to="/cart/orderconfirmed">
                     <Button label="Continue to delivery" />
                 </router-link>
             </form>
