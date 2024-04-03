@@ -66,7 +66,10 @@ import Button from '../components/Button.vue'
 
             <div class="cart__total__subtotal__divider"></div>
             <div class="cart__total__subtotal__button">
-                <Button label="Proceed To Checkout" />
+                <router-link to="/cart/checkout">
+                    <Button label="Proceed To Checkout" />
+                </router-link>
+              
             </div>
         </div>
     </div>

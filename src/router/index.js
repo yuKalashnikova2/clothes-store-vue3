@@ -11,6 +11,7 @@ import NewPassword from '../views/NewPassword.vue'
 import ShopWomen from '../views/ShopWomen.vue'
 import FullCardProduct from '../views/FullCardProduct.vue'
 import CartPage from '../views/CartPage.vue'
+import CheckOut from '../views/CheckOut.vue'
 import ErrorPage from '../views/ErrorPage.vue'
 import OrderConfirm from '../views/OrderConfirm.vue'
 
@@ -75,6 +76,14 @@ const router = createRouter({
             components: {
                 header: HeaderTop,
                 main: CartPage,
+                footer: Footer
+            }
+        },
+        {
+            path: '/cart/checkout',
+            components: {
+                header: HeaderTop,
+                main: CheckOut,
                 footer: Footer
             }
         },
