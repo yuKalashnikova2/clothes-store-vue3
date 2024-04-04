@@ -4,12 +4,16 @@ const props = defineProps({
     type: String,
     default: 'Title',
   },
+  decor: {
+    type: Boolean,
+    required: false,
+  },
 })
 </script>
 
 <template>
   <div class="card__title">
-    <div class="card__title__decor"></div>
+    <div class="card__title__decor" v-if="decor === true"></div>
     <h2 class="card__title__text">{{ title }}</h2>
   </div>
 </template>
