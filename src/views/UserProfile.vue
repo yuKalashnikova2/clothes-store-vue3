@@ -1,5 +1,6 @@
 <script setup>
 import Title from '../components/Title.vue'
+import Button from '../components/Button.vue'
 import { ref } from 'vue'
 import WishList from '../components/WishList.vue'
 import Orders from '../components/Orders.vue'
@@ -11,7 +12,7 @@ const menuList = ref([
         active: false,
     },
     {
-        name: 'Wishlist',
+        name: 'WishList',
         image: 'favorites',
         active: false,
     },
@@ -27,11 +28,14 @@ const menuList = ref([
     },
 ])
 
+const selectedComponent = ref('WishList')
+
 const toggleClass = (item) => {
     menuList.value.forEach((menuItem) => {
         menuItem.active = false
     })
     item.active = true
+    selectedComponent.value = item.name
 }
 </script>
 <template>
@@ -41,7 +45,10 @@ const toggleClass = (item) => {
             <img src="/arrow-left.svg" />
             <router-link to="/user"> My Account</router-link>
             <img src="/arrow-left.svg" />
-            <span>Wishlist</span>
+            <span v-if="selectedComponent === 'WishList'">WishList</span>
+            <span v-if="selectedComponent === 'My orders'">My orders</span>
+            <span v-if="selectedComponent === 'My info'">My info</span>
+            <span v-if="selectedComponent === 'Sign out'">Sign out</span>
         </div>
 
         <div class="profile__content">
@@ -68,9 +75,24 @@ const toggleClass = (item) => {
                 </ul>
             </div>
 
-            <!-- <WishList /> -->
+            <div v-if="selectedComponent === 'WishList'">
+                <WishList />
+            </div>
 
-            <Orders />
+            <div v-if="selectedComponent === 'My orders'">
+                <Orders />
+            </div>
+
+            <div
+                class="profile__signout"
+                v-if="selectedComponent === 'Sign out'"
+            >
+                <Title title="Do you really want to leave?" decor="false" />
+
+                <router-link to="/signin">
+                    <Button label="Yes, I am" />
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -146,6 +168,13 @@ const toggleClass = (item) => {
                 border-left: 1px solid #3c4242;
             }
         }
+    }
+    &__signout {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
     }
 }
 </style>
