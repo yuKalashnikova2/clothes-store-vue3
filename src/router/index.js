@@ -14,7 +14,7 @@ import CartPage from '../views/CartPage.vue'
 import CheckOut from '../views/CheckOut.vue'
 import ErrorPage from '../views/ErrorPage.vue'
 import OrderConfirm from '../views/OrderConfirm.vue'
-import Favorites from '../views/Favorites.vue'
+import UserProfile from '../views/UserProfile.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -105,10 +105,10 @@ const router = createRouter({
             }
         },
         {
-            path: '/favorites',
+            path: '/user',
             components: {
                 header: HeaderTop,
-                main: Favorites,
+                main: UserProfile,
                 footer: Footer
             }
         },

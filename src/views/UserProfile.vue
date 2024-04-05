@@ -1,8 +1,8 @@
 <script setup>
 import Title from '../components/Title.vue'
-import CardFavorites from '../components/CardFavorites.vue'
-import Button from '../components/Button.vue'
 import { ref } from 'vue'
+import WishList from '../components/WishList.vue'
+import Orders from '../components/Orders.vue'
 
 const menuList = ref([
     {
@@ -27,8 +27,6 @@ const menuList = ref([
     },
 ])
 
-const cardFavoritesList = ref(['1', '2', '3', '4', '5', '6', '7', '8'])
-
 const toggleClass = (item) => {
     menuList.value.forEach((menuItem) => {
         menuItem.active = false
@@ -37,8 +35,8 @@ const toggleClass = (item) => {
 }
 </script>
 <template>
-    <div class="favorites">
-        <div class="favorites__menu">
+    <div class="profile">
+        <div class="profile__menu">
             <router-link to="/">Home</router-link>
             <img src="/arrow-left.svg" />
             <router-link to="/user"> My Account</router-link>
@@ -46,19 +44,19 @@ const toggleClass = (item) => {
             <span>Wishlist</span>
         </div>
 
-        <div class="favorites__content">
-            <div class="favorites__content__menu">
+        <div class="profile__content">
+            <div class="profile__content__menu">
                 <Title title="Hello, User!" decor />
-                <span class="favorites__subtitle">Welcome to your Account</span>
+                <span class="profile__subtitle">Welcome to your Account</span>
 
-                <ul class="favorites__user">
+                <ul class="profile__user">
                     <li
                         v-for="(item, index) in menuList"
                         :key="index"
                         @click="toggleClass(item, index)"
                         :class="[
-                            'favorites__user__item',
-                            { favorites__user__item_active: item.active },
+                            'profile__user__item',
+                            { profile__user__item_active: item.active },
                         ]"
                     >
                         <img
@@ -70,35 +68,15 @@ const toggleClass = (item) => {
                 </ul>
             </div>
 
-            <div
-                v-if="cardFavoritesList.length > 0"
-                class="favorites__content__list"
-            >
-                <Title title="Wishlist" decor="false" />
+            <!-- <WishList /> -->
 
-                <CardFavorites v-for="i in 6" />
-            </div>
-            <div class="favorites__empty" v-if="cardFavoritesList.length == 0">
-                <div class="favorites__empty__image">
-                    <img src="/empty.svg" alt="empty" />
-                </div>
-                <h3 class="favorites__empty__title">Your wishlist is empty</h3>
-                <span
-                    >You don’t have any products in the wishlist yet. You will
-                    find a lot
-                </span>
-                <span>of interesting products on our Shop page.</span>
-
-                <div class="favorites__empty_margin">
-                    <Button label="Continue Shopping" />
-                </div>
-            </div>
+            <Orders />
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.favorites {
+.profile {
     padding: 23px 100px 100px 100px;
     @media (max-width: 992px) {
         padding: 23px 30px 30px 30px;
@@ -119,16 +97,17 @@ const toggleClass = (item) => {
     }
     &__content {
         margin-top: 52px;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
         gap: 50px;
-        @media (max-width: 992px) {
+
+        @media (max-width: 1100px) {
+            display: flex;
             flex-direction: column;
         }
-        &__list {
-            &:nth-child(2) {
-                flex-grow: 2;
-            }
-        }
+    }
+    &__menu {
+        flex-grow: 2;
     }
     &__subtitle {
         font-family: var(--second-family);
@@ -166,48 +145,6 @@ const toggleClass = (item) => {
                 background: #f6f6f6;
                 border-left: 1px solid #3c4242;
             }
-        }
-    }
-    &__empty {
-        box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.05),
-            -2px -2px 4px 0 rgba(0, 0, 0, 0.05);
-        background: #fff;
-        border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 78px;
-        @media (max-width: 992px) {
-            padding: 30px;
-        }
-        &__image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f0f9f4;
-            margin-bottom: 60px;
-            border-radius: 50%;
-            padding: 43px;
-        }
-        &__title {
-            font-family: var(--second-family);
-            font-weight: 600;
-            font-size: 34px;
-            color: #3c4242;
-        }
-        & span {
-            display: block;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 125%;
-            letter-spacing: 0.02em;
-            text-align: center;
-            color: #807d7e;
-            padding-top: 10px;
-        }
-        &_margin {
-            margin-top: 42px;
         }
     }
 }
