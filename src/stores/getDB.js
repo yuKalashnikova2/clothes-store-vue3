@@ -20,6 +20,19 @@ export const useFirebaseStore = defineStore('firebase', () => {
     const colors = ref([])
     const women = ref([])
 
+    //слайдер картинок сбоку
+    // const images = ref([])
+    // const currentIndex = ref(0)
+    // const prevStep = () => {
+    //     currentIndex.value =
+    //       (currentIndex.value - 1 + images.value.length) % images.value.length
+    //   }
+    
+    //   const nextStep = () => {
+    //     currentIndex.value = (currentIndex.value + 1) % images.value.length
+    //   }
+    
+
     onSnapshot(collectionSize, (snapshot) => {
         snapshot.docs.forEach((doc, index) => {
             sizes.value.push({ ...doc.data(), id: doc.id })
@@ -45,13 +58,20 @@ export const useFirebaseStore = defineStore('firebase', () => {
     onSnapshot(collectionWomenProducts, (snapshot) => {
         snapshot.docs.forEach((doc, index) => {
             women.value.push({ ...doc.data(), id: doc.id })
+            // images.value = doc.data().link_img
         })
         console.log(women, 'Женские продукты')
+        // console.log(images, 'Достаем картинки')
     })
     return {
         sizes,
         coupons,
         colors,
-        women
+        women,
+        // images,
+        // currentIndex,
+        // prevStep,
+        // nextStep,
+
     }
 })

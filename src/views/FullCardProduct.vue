@@ -14,6 +14,7 @@ const db = useFirebaseStore()
 
 const route = useRoute()
 const selectedProduct = ref('')
+const photo = ref([])
 
 watchEffect(() => {
     const id = route.params.id
@@ -21,6 +22,8 @@ watchEffect(() => {
         const foundProduct = db.women.find((product) => product.id === id)
         if (foundProduct) {
             selectedProduct.value = foundProduct
+            photo.value = foundProduct.link_img
+            console.log(photo.value, 'Проверяем массив тут')
         } else {
             console.error('Продукт с указанным id не найден')
         }
@@ -28,15 +31,25 @@ watchEffect(() => {
         console.error('Отсутствует параметр id в маршруте')
     }
 })
+const currentImage = ref('')
+
+const updateCurrentImage = (image) => {
+    currentImage.value = image
+}
 </script>
 
 <template>
     <div class="full-card">
         <div class="full-card__image">
-            <FullCardSlider />
+            <FullCardSlider
+                @imageChanged="updateCurrentImage"
+                :images="photo"
+            />
             <div class="full-card__image__photo">
-              <!-- <img :src="store.images[store.currentIndex]" alt="photo" /> -->
-                <img :src="selectedProduct.link_img" alt="photo" />
+                <img
+                    :src="[currentImage === '' ? photo[0] : currentImage]"
+                    alt="photo"
+                />
             </div>
         </div>
 
@@ -73,7 +86,7 @@ watchEffect(() => {
 
             <div class="full-card__info__video">
                 <iframe
-                    src="https://www.youtube.com/embed/6P3S2l1mY2k"
+                    :src="selectedProduct.link_video"
                     frameborder="0"
                 ></iframe>
             </div>

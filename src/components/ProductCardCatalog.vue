@@ -13,7 +13,7 @@ const store = useFirebaseStore()
                  :title="card.name"
                  :subtitle="card.add_info"
                  :price="card.price"
-                 :imageUrl="card.link_img"
+                 :imageUrl="card.link_img[0]"
                  :id="card.id"  />
         </div>
       
