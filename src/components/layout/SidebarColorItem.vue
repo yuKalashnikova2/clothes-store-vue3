@@ -6,12 +6,20 @@
       },
     })
 
+    const nameColor = (color) => {
+      let firstChar = color.charAt(0).toUpperCase()
+      let wholeWord = firstChar + color.slice(1) 
+      return wholeWord
+    }
     const getColorClass = (color) => {
   if (color === 'Red') {
     return 'sidebar__colors__item__decor_bg-red'
   }
   if (color === 'Blue') {
     return 'sidebar__colors__item__decor_bg-blue'
+  }
+  if (color === 'Brown') {
+    return 'sidebar__colors__item__decor_bg-brown'
   }
   if (color === 'Black') {
     return 'sidebar__colors__item__decor_bg-black'
@@ -46,9 +54,9 @@
 <template>
     <div class="sidebar__colors__item" >
         <div
-          :class="['sidebar__colors__item__decor', getColorClass(color)]"
+          :class="['sidebar__colors__item__decor', getColorClass(nameColor(color))]"
         ></div>
-        <span>{{ color }}</span>
+        <span>{{ nameColor(color) }}</span>
       </div>
 </template>
 

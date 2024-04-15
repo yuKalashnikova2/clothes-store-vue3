@@ -65,7 +65,7 @@ const router = createRouter({
             }
         },
         {
-            path: '/fullcardproduct/:idcard',
+            path: '/fullcardproduct/:id',
             components: {
                 header: HeaderTop,
                 main: FullCardProduct,

@@ -2,7 +2,9 @@
 import { ref } from 'vue'
 import SidebarTitle from './SidebarTitle.vue'
 import { useProductsStore } from '../../stores/index.js'
+import { useFirebaseStore } from '../../stores/getDB'
 const store = useProductsStore()
+const db = useFirebaseStore()
 
 import SidebarSizeItem from './SidebarSizeItem.vue'
 import SidebarColorItem from './SidebarColorItem.vue'
@@ -17,23 +19,23 @@ const categoriesClothes = ref([
   'Plain T-shirts',
   'Printed T-shirts',
   'Tops',
+  'Dresses'
 ])
 
-const colors = ref([
-  'Black',
-  'Blue',
-  'Green',
-  'Orange',
-  'Pink',
-  'Purple',
-  'Red',
-  'White',
-  'Yellow',
-  'Navy',
-  'Gray',
-])
+// const colors = ref([
+//   'Black',
+//   'Blue',
+//   'Green',
+//   'Orange',
+//   'Pink',
+//   'Purple',
+//   'Red',
+//   'White',
+//   'Yellow',
+//   'Navy',
+//   'Gray',
+// ])
 
-const sizes = ref(['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'])
 
 </script>
 
@@ -75,7 +77,7 @@ const sizes = ref(['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'])
       icon="arrow-up-colors"
     />
     <div class="sidebar__colors animation-visible" v-if="store.isVisibleColors">
-      <SidebarColorItem v-for="color in colors" :key="color" :color="color" />
+      <SidebarColorItem v-for="color in db.colors" :key="color.id" :color="color.name" />
     </div>
 
     <SidebarTitle
@@ -84,7 +86,7 @@ const sizes = ref(['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'])
       icon="arrow-up-sizes"
     />
     <div class="sidebar__size animation-visible" v-if="store.isVisibleSize">
-      <SidebarSizeItem v-for="size in sizes" :key="size" :size="size" />
+      <SidebarSizeItem v-for="size in db.sizes" :key="size.id" :size="size.name" />
     </div>
   </div>
 </template>

@@ -1,46 +1,16 @@
 import { defineStore } from 'pinia'
-import { ref as vueRef, onMounted } from 'vue'
-
-import {
-  getStorage,
-  getDownloadURL,
-  listAll,
-  ref
-} from 'firebase/storage'
+import { ref } from 'vue'
 
 export const useProductsStore = defineStore('products', () => {
-    const productsMen = vueRef([])
-    const storage = getStorage()
-
     const isVisibleCategories = ref(false)
     const isVisiblePrice = ref(false)
     const isVisibleColors = ref(false)
     const isVisibleSize = ref(false)
-    const fetchFilesFromFirebase = async () => {
-      try {
-        const listRef = ref(storage, 'men/')
-        const listResult = await listAll(listRef)
-        for (const itemRef of listResult.items) {
-          const url = await getDownloadURL(itemRef)
-          productsMen.value.push({
-            name: itemRef.name,
-            url,
-          })
-        }
-        console.log('МАССИВ КАРТОЧЕК', productsMen.value)
-      } catch (error) {
-        console.log('ERROR', error)
-      }
-    }
-  
-    onMounted(() => {
-      fetchFilesFromFirebase()
-  })
 
-  
-    return { productsMen, fetchFilesFromFirebase, isVisibleCategories,
-      isVisiblePrice,
-      isVisibleColors,
-      isVisibleSize
-     }
-  })
+    return {
+        isVisibleCategories,
+        isVisiblePrice,
+        isVisibleColors,
+        isVisibleSize,
+    }
+})

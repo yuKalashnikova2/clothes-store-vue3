@@ -1,12 +1,35 @@
 <script setup>
 import { ref } from 'vue'
 const addWish = ref(false)
+
+const props = defineProps({
+  id: {
+    type: String,
+    default: 'product_id_1',
+  },
+  title: {
+    type: String,
+    default: 'Title',
+  },
+  subtitle: {
+    type: String,
+    default: 'Subtitle',
+  },
+  price: {
+    type: Number,
+    default: 100,
+  },
+  imageUrl: {
+    type: String,
+    default: '/product.png',
+  }
+})
 </script>
 <template>
   <div class="product__card">
     <div class="product__card__view">
       <div class="product__card__view__image">
-        <img src="/product.png" alt="view-product" />
+        <img :src="imageUrl" :alt="title" />
       </div>
 
       <button @click="addWish = !addWish" class="product__card__view__wishlist">
@@ -21,13 +44,16 @@ const addWish = ref(false)
       </button>
     </div>
 
-    <div class="product__card__info">
+    <router-link :to="'/fullcardproduct/' + id"> 
+      <div class="product__card__info">
       <div class="product__card__info__group">
-        <span class="product__card__info__group__title">Title Card</span>
-        <span class="product__card__info__group__subtitle">SUBTitle Card</span>
+        <span class="product__card__info__group__title">{{ title }}</span>
+        <span class="product__card__info__group__subtitle">{{ subtitle }}</span>
       </div>
-      <div class="product__card__info__price">$37.00</div>
+      <div class="product__card__info__price">${{ price }}.00</div>
     </div>
+    </router-link>
+  
   </div>
 </template>
 
@@ -42,6 +68,15 @@ const addWish = ref(false)
     overflow: hidden;
     border-radius: 12px;
     position: relative;
+    &__image {
+      width: 282px;
+      height: 370px;
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
     &__wishlist {
       position: absolute;
       z-index: 3;
@@ -53,6 +88,7 @@ const addWish = ref(false)
         background: #8a33fd;
         cursor: pointer;
         transition: 0.2s ease-in-out;
+    
       }
 
       &__icon {

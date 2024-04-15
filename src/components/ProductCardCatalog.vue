@@ -1,18 +1,22 @@
 <script setup>
-import ProductCard from './ProductCard.vue';
+import ProductCard from './ProductCard.vue'
+import { useFirebaseStore } from '../stores/getDB'
+
+const store = useFirebaseStore()
 </script>
 
 <template>
     <div class="product__card__catalog">
-        <div  v-for="i in 12" :key="i" i="i">
-             <router-link :to="'/fullcardproduct/' + i"> 
-                 <ProductCard  />
-                 </router-link>
+        <div  v-for="card in store.women" :key="card.name">
+         
+                 <ProductCard 
+                 :title="card.name"
+                 :subtitle="card.add_info"
+                 :price="card.price"
+                 :imageUrl="card.link_img"
+                 :id="card.id"  />
         </div>
       
-            <!-- <ProductCard v-for="i in 12" :key="i" i="i">
-            </ProductCard>
-       -->
        
     </div>
 </template>
