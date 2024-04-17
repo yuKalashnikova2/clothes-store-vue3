@@ -1,7 +1,7 @@
 <script setup>
-// import { Swiper, SwiperSlide } from 'swiper/vue'
-// import { Pagination } from 'swiper/modules'
-import { ref, computed } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination } from 'swiper/modules'
+
 import Button from '../components/Button.vue'
 import Banner from '../components/Banner.vue'
 import WidgetCardList from '../components/WidgetCardList.vue'
@@ -9,12 +9,11 @@ import CardCategories from '../components/CardCategories.vue'
 import Title from '../components/Title.vue'
 import { useProductsStore } from '../stores/index.js'
 import TopBrandsDeal from '../components/TopBrandsDeal.vue'
-import FeedbackSlider from '../components/FeedBackSlider.vue'
-// import 'swiper/css'
-// import 'swiper/css/pagination'
+import FeedbacCard from '../components/FeedbacCard.vue'
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 const store = useProductsStore()
-
 </script>
 
 <template>
@@ -61,11 +60,25 @@ const store = useProductsStore()
       <TopBrandsDeal />
 
       <div class="content_margin_135">
-        <Title title="Feedback" decor />
-        <div class="carousel">
-          <FeedbackSlider />
-        </div>
-       
+        <Title title="Feedback" />
+        <swiper :modules="[Pagination]" :pagination="true">
+          <SwiperSlide class="content__feedback">
+            <FeedbacCard />
+            <FeedbacCard />
+            <FeedbacCard />
+          </SwiperSlide>
+
+          <SwiperSlide class="content__feedback">
+            <FeedbacCard />
+            <FeedbacCard />
+            <FeedbacCard />
+          </SwiperSlide>
+          <SwiperSlide class="content__feedback">
+            <FeedbacCard />
+            <FeedbacCard />
+            <FeedbacCard />
+          </SwiperSlide>
+        </swiper>
       </div>
     </div>
   </div>
@@ -150,7 +163,15 @@ const store = useProductsStore()
       margin-top: 35px;
     }
   }
-
+  &__feedback {
+    margin-top: 70px;
+    display: flex;
+    gap: 23px;
+    @media (max-width: 992px) {
+      flex-direction: column;
+      margin-top: 35px;
+    }
+  }
 }
 .card__list {
   display: flex;
@@ -168,29 +189,14 @@ const store = useProductsStore()
   }
 }
 
-// .swiper-pagination-bullet {
-//   background-color: rgba(34, 34, 34, 0.3);
-//   @media (max-width: 992px) {
-//     display: none;
-//   }
+.swiper-pagination-bullet {
+  background-color: rgba(34, 34, 34, 0.3);
+  @media (max-width: 992px) {
+    display: none;
+  }
 
-//   &-active {
-//     background-color: #3c4242;
-//   }
-// }
-
-.carousel {
-  position: relative;
-  margin-top: 70px;
-  &__slide-info {
-    background-color: aqua;
-    display: flex;
-    gap: 23px;
-       @media (max-width: 992px) {
-      flex-direction: column;
-      margin-top: 35px;
-    }
-
+  &-active {
+    background-color: #3c4242;
   }
 }
 </style>
