@@ -1,3 +1,15 @@
+<script setup>
+const props = defineProps({
+  name: {
+    type: String,
+    default: 'Name',
+  },
+  description: {
+    type: String,
+    default: 'Description',
+  }
+})
+</script>
 <template>
   <div class="feedback">
     <div class="feedback__info">
@@ -11,13 +23,9 @@
         </div>
       </div>
     </div>
-    <span class="feedback__name">Name Last</span>
+    <span class="feedback__name">{{ name }}</span>
     <p class="feedback__text">
-      Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-      Velit officia consequat duis enim velit mollit. Exercitation veniam
-      consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-      sit aliqua dolor do amet sint. Velit officia consequat duis enim velit
-      mollit. Exercitation veniam consequat sunt nostrud amet.
+{{ description }}
     </p>
   </div>
 </template>
@@ -33,6 +41,8 @@
 
   background: #fff;
   padding: 23px;
+
+  min-width: 396px;
   &__info {
     display: flex;
     justify-content: space-between;
