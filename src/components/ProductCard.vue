@@ -1,6 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 const addWish = ref(false)
+const route = useRoute()
+
+const path = ref(route.path)
 
 const props = defineProps({
   id: {
@@ -22,11 +26,21 @@ const props = defineProps({
   imageUrl: {
     type: String,
     default: '/product.png',
+  },
+  isMale: {
+  type: Boolean,
+
   }
 })
+
+onMounted(() => {
+  console.log(route.path)
+})
+
 </script>
 <template>
   <div class="product__card">
+    {{ isMale }}
     <div class="product__card__view">
       <div class="product__card__view__image">
         <img :src="imageUrl" :alt="title" />
@@ -44,7 +58,7 @@ const props = defineProps({
       </button>
     </div>
 
-    <router-link :to="'/fullcardproduct/' + id"> 
+    <router-link :to="route.path === '/shopemen' || isMale ? '/shopemen/fullcardproduct/' + id : '/shopwomen/fullcardproduct/' + id"> 
       <div class="product__card__info">
       <div class="product__card__info__group">
         <span class="product__card__info__group__title">{{ title }}</span>

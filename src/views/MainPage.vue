@@ -46,21 +46,21 @@ const store = useProductsStore()
 
       <div class="content__decor">
         <div>
-          <Title title="Categories For Men" />
+          <Title title="Categories For Men" decor />
           <div class="card__list">
             <CardCategories :productsMen="store.productsMen" />
           </div>
         </div>
 
         <div>
-          <Title title="Categories For Women" />
+          <Title title="Categories For Women" decor="" />
         </div>
       </div>
 
       <TopBrandsDeal />
 
       <div class="content_margin_135">
-        <Title title="Feedback" />
+        <Title title="Feedback" decor />
         <swiper :modules="[Pagination]" :pagination="true">
           <SwiperSlide class="content__feedback">
             <FeedbacCard />

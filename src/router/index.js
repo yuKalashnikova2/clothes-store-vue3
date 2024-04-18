@@ -9,6 +9,7 @@ import Footer from '../components/Footer.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import NewPassword from '../views/NewPassword.vue'
 import ShopWomen from '../views/ShopWomen.vue'
+import ShopMen from '../views/ShopMen.vue'
 import FullCardProduct from '../views/FullCardProduct.vue'
 import CartPage from '../views/CartPage.vue'
 import CheckOut from '../views/CheckOut.vue'
@@ -65,13 +66,31 @@ const router = createRouter({
             }
         },
         {
-            path: '/fullcardproduct/:id',
+            path: '/shopwomen/fullcardproduct/:id',
             components: {
                 header: HeaderTop,
                 main: FullCardProduct,
                 footer: Footer
             },
         },
+
+        {
+            path: '/shopmen',
+            components: {
+                header: HeaderTop,
+                main: ShopMen,
+                footer: Footer
+            }
+        },
+        {
+            path: '/shopemen/fullcardproduct/:id',
+            components: {
+                header: HeaderTop,
+                main: FullCardProduct,
+                footer: Footer
+            },
+        },
+       
         {
             path: '/cart',
             components: {

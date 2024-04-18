@@ -16,10 +16,18 @@ const route = useRoute()
 const selectedProduct = ref('')
 const photo = ref([])
 
+// const props = defineProps({
+//     isMale: {
+//         type: Boolean,
+//     },
+// })
+
 watchEffect(() => {
     const id = route.params.id
+    console.log(route.path)
     if (id !== undefined) {
-        const foundProduct = db.women.find((product) => product.id === id)
+        const products = route.path === '/shopemen/fullcardproduct/' + id ? db.men : db.women
+        const foundProduct = products.find((product) => product.id === id)
         if (foundProduct) {
             selectedProduct.value = foundProduct
             photo.value = foundProduct.link_img
@@ -41,6 +49,7 @@ const updateCurrentImage = (image) => {
 <template>
     <div class="full-card">
         <div class="full-card__image">
+
             <FullCardSlider
                 @imageChanged="updateCurrentImage"
                 :images="photo"

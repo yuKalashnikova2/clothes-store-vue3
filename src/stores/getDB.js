@@ -14,23 +14,13 @@ export const useFirebaseStore = defineStore('firebase', () => {
     const collectioncCoupons = collection(db, 'coupons')
     const collectioncColors = collection(db, 'colors')
     const collectionWomenProducts = collection(db, 'products_women')
+    const collectionMenProducts = collection(db, 'products_men')
 
     const sizes = ref([])
     const coupons = ref([])
     const colors = ref([])
     const women = ref([])
-
-    //слайдер картинок сбоку
-    // const images = ref([])
-    // const currentIndex = ref(0)
-    // const prevStep = () => {
-    //     currentIndex.value =
-    //       (currentIndex.value - 1 + images.value.length) % images.value.length
-    //   }
-    
-    //   const nextStep = () => {
-    //     currentIndex.value = (currentIndex.value + 1) % images.value.length
-    //   }
+    const men = ref([])
     
 
     onSnapshot(collectionSize, (snapshot) => {
@@ -58,20 +48,25 @@ export const useFirebaseStore = defineStore('firebase', () => {
     onSnapshot(collectionWomenProducts, (snapshot) => {
         snapshot.docs.forEach((doc, index) => {
             women.value.push({ ...doc.data(), id: doc.id })
-            // images.value = doc.data().link_img
+
         })
         console.log(women, 'Женские продукты')
-        // console.log(images, 'Достаем картинки')
+  
+    })
+    onSnapshot(collectionMenProducts, (snapshot) => {
+        snapshot.docs.forEach((doc, index) => {
+            men.value.push({ ...doc.data(), id: doc.id })
+
+        })
+        console.log(men, 'Мужские продукты')
+  
     })
     return {
         sizes,
         coupons,
         colors,
         women,
-        // images,
-        // currentIndex,
-        // prevStep,
-        // nextStep,
-
+        men
+     
     }
 })
