@@ -1,10 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 const addWish = ref(false)
 const route = useRoute()
 
-const path = ref(route.path)
 
 const props = defineProps({
   id: {
@@ -33,14 +32,11 @@ const props = defineProps({
   }
 })
 
-onMounted(() => {
-  console.log(route.path)
-})
+
 
 </script>
 <template>
   <div class="product__card">
-    {{ isMale }}
     <div class="product__card__view">
       <div class="product__card__view__image">
         <img :src="imageUrl" :alt="title" />
