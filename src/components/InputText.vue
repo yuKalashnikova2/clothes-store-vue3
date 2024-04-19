@@ -50,6 +50,7 @@ const emits = defineEmits(['update:value'])
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 20px;
   &__label {
     font-weight: 400;
     font-size: 18px;

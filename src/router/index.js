@@ -16,6 +16,7 @@ import CheckOut from '../views/CheckOut.vue'
 import ErrorPage from '../views/ErrorPage.vue'
 import OrderConfirm from '../views/OrderConfirm.vue'
 import UserProfile from '../views/UserProfile.vue'
+import SignUpSuccess from '../views/SignUpSuccess.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,14 @@ const router = createRouter({
                 main: SignUp
             }
         },
+        {
+            path: '/signupsuccess',
+            components: {
+                header: HeaderSign,
+                main: SignUpSuccess
+            }
+        },
+        
         {
             path: '/resetpassword',
             components: {

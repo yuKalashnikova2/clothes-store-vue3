@@ -1,10 +1,12 @@
 <script setup>
+import { ref } from 'vue'
+import { useAuthUsersStore } from '../stores/authUsers'
 import Title from '../components/Title.vue'
 import Button from '../components/Button.vue'
-import { ref } from 'vue'
 import WishList from '../components/WishList.vue'
 import Orders from '../components/Orders.vue'
 
+const auth = useAuthUsersStore()
 const menuList = ref([
     {
         name: 'My orders',
@@ -53,7 +55,7 @@ const toggleClass = (item) => {
 
         <div class="profile__content">
             <div class="profile__content__menu">
-                <Title title="Hello, User!" decor />
+                <Title :title="`Hello, ${auth.nikname}!`" decor />
                 <span class="profile__subtitle">Welcome to your Account</span>
 
                 <ul class="profile__user">
@@ -87,10 +89,11 @@ const toggleClass = (item) => {
                 class="profile__signout"
                 v-if="selectedComponent === 'Sign out'"
             >
-                <Title title="Do you really want to leave?" decor="false" />
+                <Title title="Do you really want to leave?" :decor='false' />
 
                 <router-link to="/signin">
-                    <Button label="Yes, I am" />
+                    <Button label="Yes, I am"
+                    @click="auth.signOutUser" />
                 </router-link>
             </div>
         </div>
