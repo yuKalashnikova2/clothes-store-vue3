@@ -4,7 +4,7 @@ import ToggleItem from './ToggleItem.vue'
 
 <template>
     <div class="toggle__list">
-        <ToggleItem link="/favorites" />
+        <ToggleItem link="/user/wishlist" />
         <ToggleItem link="/user" />
         <ToggleItem link="/cart" />
     </div>

@@ -16,6 +16,9 @@ import CheckOut from '../views/CheckOut.vue'
 import ErrorPage from '../views/ErrorPage.vue'
 import OrderConfirm from '../views/OrderConfirm.vue'
 import UserProfile from '../views/UserProfile.vue'
+import WishList from '../views/WishList.vue'
+import Orders from '../views/Orders.vue'
+import SignOut from '../views/SignOut.vue'
 import SignUpSuccess from '../views/SignUpSuccess.vue'
 
 const router = createRouter({
@@ -138,7 +141,21 @@ const router = createRouter({
                 header: HeaderTop,
                 main: UserProfile,
                 footer: Footer
-            }
+            },
+            children: [
+                {
+                  path: 'wishlist',
+                  component: WishList
+                },
+                {
+                  path: 'orders',
+                  component: Orders
+                },
+                {
+                  path: 'signout',
+                  component: SignOut
+                }
+              ]
         },
     ]
 })

@@ -1,17 +1,18 @@
 <script setup>
-import { useCartStore } from '../../stores/cart.js'
+import { ref } from 'vue'
+// import { useCartStore } from '../../stores/cart.js'
 
-const store = useCartStore()
-
+// const store = useCartStore()
+const count = ref(0)
 </script>
 
 <template>
     <div class="counter">
         <div class="counter__button"
-        @click="store.minusCounter">-</div>
-        <div>{{ store.counter }}</div>
+        @click="count--">-</div>
+        <div>{{ count }}</div>
         <div class="counter__button"
-        @click="store.plusCounter">+</div>
+        @click="count++">+</div>
     </div>
 </template>
 

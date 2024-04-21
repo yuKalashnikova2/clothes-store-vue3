@@ -13,7 +13,7 @@ const props = defineProps({
         :class="['toggle__item', { toggle__item_active: $route.path === link || $route.path === link + '/checkout' || $route.path === link + '/orderconfirmed' }]"
     >
         <svg
-            v-if="link === '/favorites'"
+            v-if="link === '/user/wishlist'"
             width="20"
             height="20"
             viewBox="0 0 20 20"

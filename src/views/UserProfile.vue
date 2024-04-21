@@ -1,20 +1,26 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAuthUsersStore } from '../stores/authUsers'
+import { useRoute } from 'vue-router'
 import Title from '../components/Title.vue'
 import Button from '../components/Button.vue'
 import WishList from '../components/WishList.vue'
 import Orders from '../components/Orders.vue'
+import router from '../router'
 
 const auth = useAuthUsersStore()
+const route = useRoute()
+console.log(route.path)
 const menuList = ref([
     {
         name: 'My orders',
         image: 'orders',
         active: false,
+        path: 'orders',
     },
     {
         name: 'WishList',
+        path: 'wishlist',
         image: 'favorites',
         active: false,
     },
@@ -27,17 +33,20 @@ const menuList = ref([
         name: 'Sign out',
         image: 'signout',
         active: false,
+        path: 'signout',
     },
 ])
 
 const selectedComponent = ref('WishList')
 
+selectedComponent.value = route.path.split('/').pop()
+
 const toggleClass = (item) => {
     menuList.value.forEach((menuItem) => {
-        menuItem.active = false
+        menuItem.active = menuItem === item
     })
-    item.active = true
-    selectedComponent.value = item.name
+    const path = item.path
+    router.push({ path })
 }
 </script>
 <template>
@@ -55,7 +64,7 @@ const toggleClass = (item) => {
 
         <div class="profile__content">
             <div class="profile__content__menu">
-                <Title :title="`Hello, ${auth.nikname}!`" decor />
+                <Title :title="`Hello, ${auth.nikname}!`" :decor="true" />
                 <span class="profile__subtitle">Welcome to your Account</span>
 
                 <ul class="profile__user">
@@ -77,7 +86,8 @@ const toggleClass = (item) => {
                 </ul>
             </div>
 
-            <div v-if="selectedComponent === 'WishList'">
+            <router-view></router-view>
+            <!-- <div v-if="selectedComponent === 'WishList'">
                 <WishList />
             </div>
 
@@ -95,7 +105,7 @@ const toggleClass = (item) => {
                     <Button label="Yes, I am"
                     @click="auth.signOutUser" />
                 </router-link>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -172,12 +182,12 @@ const toggleClass = (item) => {
             }
         }
     }
-    &__signout {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-    }
+    // &__signout {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     align-items: center;
+    //     gap: 30px;
+    // }
 }
 </style>
