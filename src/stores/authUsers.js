@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useFirebaseStore } from './getDB'
 
 import {
@@ -9,7 +9,14 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
 } from 'firebase/auth'
-import { addDoc, collection, onSnapshot } from 'firebase/firestore'
+import {
+    addDoc,
+    collection,
+    updateDoc,
+    doc,
+    getDoc,
+    setDoc,
+} from 'firebase/firestore'
 
 export const useAuthUsersStore = defineStore('authusers', () => {
     const auth = getAuth()
@@ -47,7 +54,6 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             console.error('Ошибка при создании аккаунта:', error)
         }
     }
-
     const login = (email, password) =>
         signInWithEmailAndPassword(auth, email, password)
             .then((cred) => {
@@ -73,6 +79,54 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         console.log('cтатус пользователя изменен', user)
     })
 
+    const addToCart = async (elem) => {
+        try {
+            const currentUser = auth.currentUser
+            if (!currentUser) {
+                throw new Error('Пользователь не авторизован')
+            }
+
+            const usersCollection = collection(firebase.db, 'users')
+
+            const userDocRef = doc(usersCollection, currentUser.uid)
+
+            console.log(userDocRef, 'userDocRef NEN')
+            const userDocSnapshot = await getDoc(userDocRef)
+
+            console.log(userDocSnapshot.exists(), 'userDocSnapshot.exists()')
+            if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data()
+                const updatedCart = [...userData.cart, { ...elem }]
+                await updateDoc(userDocRef, { cart: updatedCart })
+                console.log('Товар успешно добавлен в корзину')
+            } else {
+                await setDoc(userDocRef, { cart: [elem] })
+                console.log('Документ пользователя создан ЗДЕСЬ')
+            }
+        } catch (error) {
+            console.error('Ошибка при добавлении товара в корзину:', error)
+        }
+    }
+
+    const cartItems = ref([])
+
+    const getCartItems = async () => {
+        const currentUser = auth.currentUser
+        if (!currentUser) {
+            throw new Error('Пользователь не авторизован')
+        }
+        const userDocRef = doc(firebase.db, 'users', currentUser.uid)
+        try {
+            const userDocSnapshot = await getDoc(userDocRef)
+            if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data()
+                cartItems.value = userData.cart
+            }
+            console.log('Данные корзины получены:', cartItems.value)
+        } catch (error) {
+            console.error('Ошибка при получении данных корзины:', error)
+        }
+    }
     return {
         login,
         changeStatusUser,
@@ -82,5 +136,8 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         nikname,
         createUser,
         errorCreateUser,
+        addToCart,
+        getCartItems,
+        cartItems,
     }
 })

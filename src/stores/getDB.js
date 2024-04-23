@@ -3,8 +3,9 @@ import { ref } from 'vue'
 import {
     getFirestore,
     collection,
-    getDocs,
+    getDoc,
     onSnapshot,
+    doc
 } from 'firebase/firestore'
 
 export const useFirebaseStore = defineStore('firebase', () => {
@@ -23,6 +24,7 @@ export const useFirebaseStore = defineStore('firebase', () => {
     const women = ref([])
     const men = ref([])
     const users = ref([])
+    const cartItems = ref([])
 
     onSnapshot(collectionSize, (snapshot) => {
         snapshot.docs.forEach((doc, index) => {
@@ -70,6 +72,43 @@ export const useFirebaseStore = defineStore('firebase', () => {
         })
         console.log(users, 'Юзеры в наличии')
     })
+
+    // const getCartItems = async () => {
+    //     const currentUser = auth.currentUser;
+    //          // Получить массив товаров из Firestore
+    //          const userDocRef = doc(db, 'users', currentUser.uid);
+    //          try {
+    //            const userDocSnapshot = await getDoc(userDocRef);
+    //            if (userDocSnapshot.exists()) {
+    //              const userData = userDocSnapshot.data();
+    //              cartItems.value = userData.cart;
+    //            }
+    //            console.log("Данные корзины получены:", cartItems.value);
+    //          } catch (error) {
+    //            console.error("Ошибка при получении данных корзины:", error);
+    //          }
+    // }
+
+ 
+
+
+
+
+    // onMounted(async () => {
+    //     // Получить массив товаров из Firestore
+    //     const userDocRef = doc(db, 'users', currentUser.uid);
+    //     try {
+    //       const userDocSnapshot = await getDoc(userDocRef);
+    //       if (userDocSnapshot.exists()) {
+    //         const userData = userDocSnapshot.data();
+    //         cartItems.value = userData.cart;
+    //       }
+    //       console.log("Данные корзины получены:", cartItems.value);
+    //     } catch (error) {
+    //       console.error("Ошибка при получении данных корзины:", error);
+    //     }
+    //   });
+
     return {
         sizes,
         coupons,
@@ -78,6 +117,8 @@ export const useFirebaseStore = defineStore('firebase', () => {
         men,
         users,
         collectionUsers,
-        db
+        db,
+        // getCartItems,
+        // cartItems
     }
 })

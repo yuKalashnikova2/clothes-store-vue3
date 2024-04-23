@@ -1,23 +1,48 @@
 <script setup>
 import Counter from './Counter.vue'
-
+const props = defineProps({
+    id: {
+        type: String,
+        default: 'product_id_1',
+    },
+    title: {
+        type: String,
+        default: 'Title',
+    },
+    price: {
+        type: Number,
+        default: 100,
+    },
+    image: {
+        type: String,
+        default: '/no-foto.png',
+    },
+    color: {
+        type: String,
+        default: 'red',
+    },
+    size: {
+        type: String,
+        default: 'L',
+    }
+})
 </script>
 <template>
     <div class="cart__item">
         <div class="cart__item__top">
             <div class="cart__item__image">
-                <img src="/product.png" alt="product">
+                <img :src="image" alt="product">
             </div>
          
             <div class="cart__item__info">
-               <span class="cart__item__title">Title</span>
-               <span class="cart__item__description">Color: red</span>
-               <span class="cart__item__description">Size: L</span>
+               <span class="cart__item__title">{{ title }}</span>
+               <span class="cart__item__description">Color: {{ color }}</span>
+               <span class="cart__item__description">Size: {{ size }}</span>
             </div>
         </div>
 
         <div class="cart__item__price">
-            $23.00
+            ${{ price }}
         </div>
 
         <Counter />
@@ -25,7 +50,7 @@ import Counter from './Counter.vue'
             Free
         </div>
         <div class="cart__item__price">
-            $119.00
+            ${{ price }}
         </div>
         <div class="cart__item__remove">
             <img src="/deletecon.svg" alt="trash">

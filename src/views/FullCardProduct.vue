@@ -2,6 +2,7 @@
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useFirebaseStore } from '../stores/getDB'
+import { useAuthUsersStore } from '../stores/authUsers'
 import Button from '../components/Button.vue'
 import Title from '../components/Title.vue'
 
@@ -11,16 +12,11 @@ import FullCardColors from '../components/FullCard/FullCardColors.vue'
 import FullCardSize from '../components/FullCard/FullCardSize.vue'
 import FullCardProductDetails from '../components/FullCard/FullCardProductDetails.vue'
 const db = useFirebaseStore()
+const auth = useAuthUsersStore()
 
 const route = useRoute()
 const selectedProduct = ref('')
 const photo = ref([])
-
-// const props = defineProps({
-//     isMale: {
-//         type: Boolean,
-//     },
-// })
 
 watchEffect(() => {
     const id = route.params.id
@@ -72,7 +68,8 @@ const updateCurrentImage = (image) => {
                 <FullCardColors />
 
                 <div class="full-card__description__buttons">
-                    <Button label="Add To Cart" />
+                    <Button label="Add To Cart"
+                    @click="auth.addToCart(selectedProduct)" />
                     <Button label="$63.00" color="secondary" />
                 </div>
             </div>
