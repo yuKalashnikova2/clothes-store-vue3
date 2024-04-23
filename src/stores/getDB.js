@@ -15,13 +15,14 @@ export const useFirebaseStore = defineStore('firebase', () => {
     const collectioncColors = collection(db, 'colors')
     const collectionWomenProducts = collection(db, 'products_women')
     const collectionMenProducts = collection(db, 'products_men')
+    const collectionUsers = collection(db, 'users')
 
     const sizes = ref([])
     const coupons = ref([])
     const colors = ref([])
     const women = ref([])
     const men = ref([])
-    
+    const users = ref([])
 
     onSnapshot(collectionSize, (snapshot) => {
         snapshot.docs.forEach((doc, index) => {
@@ -61,12 +62,22 @@ export const useFirebaseStore = defineStore('firebase', () => {
         console.log(men, 'Мужские продукты')
   
     })
+
+
+    onSnapshot(collectionUsers, (snapshot) => {
+        snapshot.docs.forEach((doc, index) => {
+            users.value.push({ ...doc.data(), id: doc.id })
+        })
+        console.log(users, 'Юзеры в наличии')
+    })
     return {
         sizes,
         coupons,
         colors,
         women,
-        men
-     
+        men,
+        users,
+        collectionUsers,
+        db
     }
 })

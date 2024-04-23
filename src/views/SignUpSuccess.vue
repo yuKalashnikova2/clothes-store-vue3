@@ -13,7 +13,7 @@ const auth = useAuthUsersStore()
             </div>
 
             <div class="order__text_padding">
-                <span>Dear {{ auth.user }}, </span>
+                <span>Dear {{ auth.nikname }}, </span>
                 <span>You are successfully </span>
                 <span>Registered!</span>
             </div>

@@ -97,12 +97,18 @@ const togglePasswordVisibility = () => {
                         />
                     </div>
 
+                    <div v-if="auth.isError">
+                        <span class="sign-in__form__submit__description sign-in__form__submit__description_error">
+                           Somthing went wrong! Try again {{ auth.errorCreateUser }}
+                        </span>
+                    </div>
+                   ОШИБКА ТУТ {{ auth.isError }}
                     <div class="sign-in__form__submit__inputs__sign">
-                        <router-link to="/signupsuccess">
+                        <router-link :to="auth.isError ? '' : '/signupsuccess'">
                             <Button
                                 label="Sign Up"
                                 :disabled="!newsletterSubscribed"
-                                @click="auth.signup(email, password)"
+                                @click="auth.createUser(email, password)"
                             />
                         </router-link>
                         <span>

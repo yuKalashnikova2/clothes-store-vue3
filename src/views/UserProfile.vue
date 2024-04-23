@@ -1,11 +1,8 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useAuthUsersStore } from '../stores/authUsers'
 import { useRoute } from 'vue-router'
 import Title from '../components/Title.vue'
-import Button from '../components/Button.vue'
-import WishList from '../components/WishList.vue'
-import Orders from '../components/Orders.vue'
 import router from '../router'
 
 const auth = useAuthUsersStore()
@@ -45,8 +42,9 @@ const toggleClass = (item) => {
     menuList.value.forEach((menuItem) => {
         menuItem.active = menuItem === item
     })
-    const path = item.path
-    router.push({ path })
+    const path = `/user/${item.path}`
+    router.push({  path })
+    console.log(path, 'ПРОВЕРКА ПУТИ ПОЧЕМУ НЕ РАБОТАЕТ')
 }
 </script>
 <template>
@@ -87,25 +85,6 @@ const toggleClass = (item) => {
             </div>
 
             <router-view></router-view>
-            <!-- <div v-if="selectedComponent === 'WishList'">
-                <WishList />
-            </div>
-
-            <div v-if="selectedComponent === 'My orders'">
-                <Orders />
-            </div>
-
-            <div
-                class="profile__signout"
-                v-if="selectedComponent === 'Sign out'"
-            >
-                <Title title="Do you really want to leave?" :decor='false' />
-
-                <router-link to="/signin">
-                    <Button label="Yes, I am"
-                    @click="auth.signOutUser" />
-                </router-link>
-            </div> -->
         </div>
     </div>
 </template>
@@ -182,12 +161,5 @@ const toggleClass = (item) => {
             }
         }
     }
-    // &__signout {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     align-items: center;
-    //     gap: 30px;
-    // }
 }
 </style>
