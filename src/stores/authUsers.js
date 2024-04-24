@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, watch, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useFirebaseStore } from './getDB'
 
 import {
@@ -54,17 +54,28 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             console.error('Ошибка при создании аккаунта:', error)
         }
     }
+
+    const userToken = ref([])
     const login = (email, password) =>
         signInWithEmailAndPassword(auth, email, password)
             .then((cred) => {
                 nikname.value = cred.user.email
-                console.log('пользователь вошел', cred.user)
+                const user = auth.currentUser
+                if (user) {
+                    user.getIdToken().then((idToken) => {
+                        localStorage.setItem('token', idToken)
+                        userToken.value = idToken
+                        console.log('ТОКЕН СОЗДАН', idToken)
+                    })
+                }
+                console.log('пользователь вошел', cred.user, nikname.value)
             })
             .catch((err) => {
                 isError.value = true
                 errorSignUp.value = err.message
                 console.log(err.message, 'ОШИБОЧКА ВЫШЛА')
             })
+
     const signOutUser = () => {
         signOut(auth)
             .then(() => {
@@ -76,6 +87,9 @@ export const useAuthUsersStore = defineStore('authusers', () => {
     }
 
     const changeStatusUser = onAuthStateChanged(auth, (user) => {
+        if (user) {
+            JSON.parse(localStorage.getItem('token'))
+        }
         console.log('cтатус пользователя изменен', user)
     })
 
@@ -127,6 +141,28 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             console.error('Ошибка при получении данных корзины:', error)
         }
     }
+    const deleteCartItem = async (itemId) => {
+        const currentUser = auth.currentUser
+        if (!currentUser) {
+            throw new Error('Пользователь не авторизован')
+        }
+        const userDocRef = doc(firebase.db, 'users', currentUser.uid)
+        try {
+            const userDocSnapshot = await getDoc(userDocRef)
+            if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data()
+                const updatedCart = userData.cart.filter(
+                    (item) => item.id !== itemId
+                )
+                await updateDoc(userDocRef, { cart: updatedCart })
+                console.log('Товар успешно удален из корзины')
+            } else {
+                console.log('Документ пользователя не найден')
+            }
+        } catch (error) {
+            console.error('Ошибка при удалении товара из корзины:', error)
+        }
+    }
     return {
         login,
         changeStatusUser,
@@ -139,5 +175,6 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         addToCart,
         getCartItems,
         cartItems,
+        deleteCartItem,
     }
 })

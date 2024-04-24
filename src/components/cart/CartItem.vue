@@ -1,5 +1,7 @@
 <script setup>
+import { useAuthUsersStore } from '../../stores/authUsers'
 import Counter from './Counter.vue'
+const auth = useAuthUsersStore()
 const props = defineProps({
     id: {
         type: String,
@@ -52,7 +54,8 @@ const props = defineProps({
         <div class="cart__item__price">
             ${{ price }}
         </div>
-        <div class="cart__item__remove">
+        <div class="cart__item__remove"
+        @click="auth.deleteCartItem(id)">
             <img src="/deletecon.svg" alt="trash">
         </div>
     </div>
