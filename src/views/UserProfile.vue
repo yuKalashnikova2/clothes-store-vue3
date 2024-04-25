@@ -25,6 +25,7 @@ const menuList = ref([
         name: 'My info',
         image: 'user',
         active: false,
+        path: 'info',
     },
     {
         name: 'Sign out',
@@ -43,7 +44,7 @@ const toggleClass = (item) => {
         menuItem.active = menuItem === item
     })
     const path = `/user/${item.path}`
-    router.push({  path })
+    router.push({ path })
     console.log(path, 'ПРОВЕРКА ПУТИ ПОЧЕМУ НЕ РАБОТАЕТ')
 }
 </script>

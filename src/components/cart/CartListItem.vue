@@ -20,7 +20,7 @@ onMounted(async () => {
             :key="item.id"
             :id="item.id"
             :price="item.price"
-            :image="item.link_img[0]"
+
             :title="item.name"
         />
     </div>

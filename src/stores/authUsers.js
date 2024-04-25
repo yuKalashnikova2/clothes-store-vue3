@@ -163,6 +163,75 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             console.error('Ошибка при удалении товара из корзины:', error)
         }
     }
+
+    //wishlist
+    const addToWishlist = async (itemId) => {
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error('Пользователь не авторизован');
+        }
+        const userDocRef = doc(firebase.db, 'users', currentUser.uid);
+        try {
+          const userDocSnapshot = await getDoc(userDocRef);
+          if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            const wishlist = userData.wishlist || []; // Если wishlist не существует, создаем пустой массив
+            // Проверяем, что товар с таким itemId еще не добавлен в wishlist
+            if (wishlist.some(item => item.id === itemId)) {
+              console.log('Товар уже добавлен в wishlist');
+              return; // Если товар уже добавлен, просто выходим из функции
+            }
+            wishlist.push({ ...itemId }); // Добавляем новый товар в wishlist
+            await updateDoc(userDocRef, { wishlist });
+            console.log('Товар успешно добавлен в wishlist');
+          } else {
+            console.log('Документ пользователя не найден');
+          }
+        } catch (error) {
+          console.error('Ошибка при добавлении товара в wishlist:', error);
+        }
+      }
+      const wishlistItems = ref([])
+      const getWishListItems = async () => {
+        const currentUser = auth.currentUser
+        if (!currentUser) {
+            throw new Error('Пользователь не авторизован')
+        }
+        const userDocRef = doc(firebase.db, 'users', currentUser.uid)
+        try {
+            const userDocSnapshot = await getDoc(userDocRef)
+            if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data()
+                wishlistItems.value = userData.wishlist
+            }
+            console.log('Данные wishlist получены:', wishlistItems.value)
+        } catch (error) {
+            console.error('Ошибка при получении данных wishlist:', error)
+        }
+    }
+
+    const deleteWishListItems = async (itemId) => {
+        const currentUser = auth.currentUser
+        if (!currentUser) {
+            throw new Error('Пользователь не авторизован')
+        }
+        const userDocRef = doc(firebase.db, 'users', currentUser.uid)
+        try {
+            const userDocSnapshot = await getDoc(userDocRef)
+            if (userDocSnapshot.exists()) {
+                const userData = userDocSnapshot.data()
+                const updatedWishlist = userData.wishlist.filter(
+                    (item) => item.id !== itemId
+                )
+                await updateDoc(userDocRef, { wishlist: updatedWishlist })
+                console.log('Товар успешно удален из wishlist')
+            } else {
+                console.log('Документ пользователя не найден')
+            }
+        } catch (error) {
+            console.error('Ошибка при удалении товара из wishlist:', error)
+        }
+    }
     return {
         login,
         changeStatusUser,
@@ -176,5 +245,9 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         getCartItems,
         cartItems,
         deleteCartItem,
+        addToWishlist,
+        wishlistItems,
+        getWishListItems,
+        deleteWishListItems,
     }
 })

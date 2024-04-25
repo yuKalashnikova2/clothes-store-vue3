@@ -16,7 +16,8 @@ const isMale = ref(true)
                  :price="card.price"
                  :imageUrl="card.link_img[0]"
                  :id="card.id"
-                 :isMale="isMale"  />
+                 :isMale="isMale"
+                 :wholeList="card"  />
         </div>
       
        

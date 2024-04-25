@@ -18,6 +18,7 @@ import OrderConfirm from '../views/OrderConfirm.vue'
 import UserProfile from '../views/UserProfile.vue'
 import WishList from '../views/WishList.vue'
 import Orders from '../views/Orders.vue'
+import Info from '../views/Info.vue'
 import SignOut from '../views/SignOut.vue'
 import SignUpSuccess from '../views/SignUpSuccess.vue'
 
@@ -151,6 +152,10 @@ const router = createRouter({
                   path: 'orders',
                   component: Orders
                 },
+                {
+                    path: 'info',
+                    component: Info
+                  },
                 {
                   path: 'signout',
                   component: SignOut

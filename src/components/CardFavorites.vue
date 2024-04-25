@@ -1,24 +1,42 @@
 <script setup>
+import { useAuthUsersStore } from '../stores/authUsers'
 import Button from '../components/Button.vue'
+
+const auth = useAuthUsersStore()
+
+const isDeletedWishlist = ref(false)
+const deletedItemFromWishlist = (item) => {
+    auth.deleteWishListItems(item)
+    isDeletedWishlist.value = true
+}
+const props = defineProps({
+    elem: {
+        type: Object,
+        default: {},
+    },
+})
 </script>
 <template>
     <div class="card">
-        <div class="card__close">
+        <span class="card__deleted" v-if="auth.isDeletedWishlist"
+            >Item successfully deleted</span
+        >
+        <div class="card__close" @click="deletedItemFromWishlist(elem)">
             <img src="/close-cross.svg" alt="close" />
         </div>
         <div class="card__image">
-            <img src="/product.png" alt="product" />
+            <img src="/no-foto.png" alt="product" />
         </div>
 
         <div class="card__info">
-            <span>Title Card</span>
+            <span>{{ elem.name }}</span>
             <span>Color: <span class="card__info_font-color">Black</span></span>
-            <span>Quantity: <span class="card__info_font-color">1</span></span>
+            <span>Quantity:<span class="card__info_font-color">1</span></span>
         </div>
 
-        <div class="card__price">$23.00</div>
+        <div class="card__price">${{ elem.price }}</div>
 
-        <Button label="Add To Cart" />
+        <Button @click="auth.addToCart(elem)" label="Add To Cart" />
     </div>
 </template>
 
@@ -69,6 +87,19 @@ import Button from '../components/Button.vue'
         font-size: 22px;
         letter-spacing: 0.02em;
         color: #807d7e;
+    }
+    &__deleted {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border-radius: 8px;
+        padding: 12px 48px;
+        background: #8a33fd;
+        color: #fff;
+        text-align: center;
+        font-weight: 500;
+        font-size: 18px;
     }
 }
 </style>

@@ -1,19 +1,34 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+import { useAuthUsersStore } from '../stores/authUsers'
 import Title from '../components/Title.vue'
 import CardFavorites from '../components/CardFavorites.vue'
 import Button from '../components/Button.vue'
-import { ref } from 'vue'
 
-const cardFavoritesList = ref(['1', '2', '3', '4', '5', '6', '7', '8'])
+// const cardFavoritesList = ref(['1', '2', '3', '4', '5', '6', '7', '8'])
+
+const store = useAuthUsersStore()
+
+const datawishlist = ref([])
+
+onMounted(async () => {
+    await store.getWishListItems()
+    datawishlist.value = store.wishlistItems
+    console.log('МОНТИРОВАНИЕ ВИШЛИСТА', datawishlist.value)
+})
 </script>
 
 <template>
-    <div v-if="cardFavoritesList.length > 0" class="favorites__list">
-        <Title title="Wishlist" decor="false" />
+    <div v-if="datawishlist.length > 0" class="favorites__list">
+        <Title title="Wishlist" :decor="false" />
 
-        <CardFavorites v-for="i in 6" />
+        <CardFavorites
+            v-for="elem in datawishlist"
+            :key="elem.id"
+            :elem="elem"
+        />
     </div>
-    <div class="favorites__empty" v-if="cardFavoritesList.length == 0">
+    <div class="favorites__empty" v-if="datawishlist.length == 0">
         <div class="favorites__empty__image">
             <img src="/empty.svg" alt="empty" />
         </div>
@@ -25,7 +40,9 @@ const cardFavoritesList = ref(['1', '2', '3', '4', '5', '6', '7', '8'])
         <span>of interesting products on our Shop page.</span>
 
         <div class="favorites__empty_margin">
-            <Button label="Continue Shopping" />
+            <router-link to="/shopmen">
+                <Button label="Continue Shopping" />
+            </router-link>
         </div>
     </div>
 </template>
