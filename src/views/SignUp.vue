@@ -102,7 +102,6 @@ const togglePasswordVisibility = () => {
                            Somthing went wrong! Try again {{ auth.errorCreateUser }}
                         </span>
                     </div>
-                   ОШИБКА ТУТ {{ auth.isError }}
                     <div class="sign-in__form__submit__inputs__sign">
                         <router-link :to="auth.isError ? '' : '/signupsuccess'">
                             <Button

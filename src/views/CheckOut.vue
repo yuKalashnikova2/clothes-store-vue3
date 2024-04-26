@@ -14,6 +14,54 @@ const city = ref('')
 const state = ref('')
 const postcode = ref('')
 const phone = ref('')
+const incorrectInput = ref(false)
+const incorrectInputText = ref('Error enter')
+
+const submitForm = () => {
+
+  if (!firstName.value) {
+    incorrectInput.value = true
+    incorrectInputText.value = 'Please enter your first name'
+    return
+  }
+  if (!lastName.value) {
+    incorrectInput.value = true
+    incorrectInputText.value = 'Please enter your last name'
+    return
+  }
+  if (!country.value) {
+    incorrectInput.value = true
+    incorrectInputText.value =  'Please select a country'
+    return
+  }
+  if (!phone.value) {
+    incorrectInput.value = true
+    incorrectInputText.value = 'Please enter your phone number'
+    return
+  }
+  if (!validatePhoneNumber(phone.value)) {
+    incorrectInput.value = true
+    incorrectInputText.value = 'Please enter a valid phone number'
+    return
+  }
+
+  const formData = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    country: country.value,
+    company: company.value,
+    address: address.value,
+    city: city.value,
+    state: state.value,
+    postcode: postcode.value,
+    phone: phone.value,
+  }
+  console.log('Form data:', formData)
+}
+
+const validatePhoneNumber = (phoneNumber) => {
+  return /^\d{10}$/.test(phoneNumber)
+}
 </script>
 <template>
     <div class="checkout">
@@ -31,7 +79,9 @@ const phone = ref('')
         <div class="checkout__subtitle">Billing Details</div>
 
         <div class="checkout__details">
+
             <form class="checkout__form" @submit.prevent>
+                <span class="checkout__error" v-if="incorrectInput">{{ incorrectInputText }}</span>
                 <div class="checkout__form_grid-2fr">
                     <CheckoutInput
                         label="First Name*"
@@ -111,7 +161,8 @@ const phone = ref('')
                     />
                 </div>
                 <router-link to="/cart/orderconfirmed">
-                    <Button label="Continue to delivery" />
+                    <Button label="Continue to delivery"
+                    @click="submitForm" />
                 </router-link>
             </form>
 
@@ -190,6 +241,7 @@ const phone = ref('')
         @media (max-width: 1200px) {
             grid-template-columns: 1fr;
         }
+
     }
     &__form {
         padding-top: 50px;
@@ -258,5 +310,15 @@ const phone = ref('')
             gap: 15px;
         }
     }
+    &__error {
+        margin-top: 10px;
+        margin-bottom: 30px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 125%;
+        display: block;
+        color: #ee1d52;
+
+}
 }
 </style>

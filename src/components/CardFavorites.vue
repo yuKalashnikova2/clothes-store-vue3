@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import { useAuthUsersStore } from '../stores/authUsers'
 import Button from '../components/Button.vue'
 
@@ -25,7 +26,7 @@ const props = defineProps({
             <img src="/close-cross.svg" alt="close" />
         </div>
         <div class="card__image">
-            <img src="/no-foto.png" alt="product" />
+            <img :src="elem.link_img[0] ? elem.link_img[0] : '/no-foto.png'" alt="product" />
         </div>
 
         <div class="card__info">

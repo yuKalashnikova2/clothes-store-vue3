@@ -136,9 +136,9 @@ export const useAuthUsersStore = defineStore('authusers', () => {
                 const userData = userDocSnapshot.data()
                 cartItems.value = userData.cart
             }
-            console.log('Данные корзины получены:', cartItems.value)
+            console.log('Данные корзины получены ВОТ ЭТА ФУНКЦИЯ:', cartItems.value)
         } catch (error) {
-            console.error('Ошибка при получении данных корзины:', error)
+            console.error('Ошибка при получении данных корзины !!!:', error)
         }
     }
     const deleteCartItem = async (itemId) => {

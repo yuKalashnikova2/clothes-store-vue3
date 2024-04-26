@@ -15,17 +15,17 @@ const props = defineProps({
         type: Number,
         default: 100,
     },
-    image: {
-        type: String,
-        default: '/no-foto.png',
-    },
-    color: {
-        type: String,
-        default: 'red',
+    colors: {
+        type: Array,
+        default: () => [],
     },
     size: {
-        type: String,
-        default: 'L',
+        type: Array,
+        default: () => [],
+    },
+    link_img: {
+        type: Array,
+        default: () => [],
     }
 })
 </script>
@@ -33,13 +33,13 @@ const props = defineProps({
     <div class="cart__item">
         <div class="cart__item__top">
             <div class="cart__item__image">
-                <img :src="image" alt="product">
+                <img :src="link_img[0]" alt="product">
             </div>
          
             <div class="cart__item__info">
                <span class="cart__item__title">{{ title }}</span>
-               <span class="cart__item__description">Color: {{ color }}</span>
-               <span class="cart__item__description">Size: {{ size }}</span>
+               <span class="cart__item__description">Color: {{ colors[0].name }}</span>
+               <span class="cart__item__description">Size: {{ size[0].name }}</span>
             </div>
         </div>
 

@@ -4,8 +4,8 @@ import { useAuthUsersStore } from '../../stores/authUsers'
 import CartItem from './CartItem.vue'
 
 const store = useAuthUsersStore()
-
 const dataCart = ref([])
+
 
 onMounted(async () => {
     await store.getCartItems()
@@ -18,10 +18,11 @@ onMounted(async () => {
         <CartItem
             v-for="item in dataCart"
             :key="item.id"
-            :id="item.id"
             :price="item.price"
-
             :title="item.name"
+            :link_img="item.link_img"
+            :size="item.sizes"
+            :colors="item.colors"
         />
     </div>
 </template>
