@@ -3,9 +3,9 @@ import { ref, onMounted } from 'vue'
 import { useAuthUsersStore } from '../../stores/authUsers'
 import CartItem from './CartItem.vue'
 
+
 const store = useAuthUsersStore()
 const dataCart = ref([])
-
 
 onMounted(async () => {
     await store.getCartItems()
@@ -15,6 +15,7 @@ onMounted(async () => {
 </script>
 <template>
     <div class="cart__list">
+        <CartItem />
         <CartItem
             v-for="item in dataCart"
             :key="item.id"
@@ -23,6 +24,7 @@ onMounted(async () => {
             :link_img="item.link_img"
             :size="item.sizes"
             :colors="item.colors"
+            :count="item.count"
         />
     </div>
 </template>

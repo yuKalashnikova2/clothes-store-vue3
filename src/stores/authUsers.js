@@ -123,7 +123,7 @@ export const useAuthUsersStore = defineStore('authusers', () => {
     }
 
     const cartItems = ref([])
-
+    const subtotalPrice = ref(0)
     const getCartItems = async () => {
         const currentUser = auth.currentUser
         if (!currentUser) {
@@ -134,13 +134,16 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             const userDocSnapshot = await getDoc(userDocRef)
             if (userDocSnapshot.exists()) {
                 const userData = userDocSnapshot.data()
-                cartItems.value = userData.cart
+                cartItems.value = Array.from(userData.cart, (item) => ({ ...item, count: 1 }));
+                // cartItems.value = [{ ...userData.cart, count: 1}]
             }
             console.log('Данные корзины получены ВОТ ЭТА ФУНКЦИЯ:', cartItems.value)
         } catch (error) {
             console.error('Ошибка при получении данных корзины !!!:', error)
         }
     }
+    //геттер для общей суммы
+    const getTotalCount = cartItems.value.map((item) => item.count).reduce((a, b) => a + b, 0)
     const deleteCartItem = async (itemId) => {
         const currentUser = auth.currentUser
         if (!currentUser) {
@@ -244,10 +247,12 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         addToCart,
         getCartItems,
         cartItems,
+        subtotalPrice,
         deleteCartItem,
         addToWishlist,
         wishlistItems,
         getWishListItems,
         deleteWishListItems,
+        getTotalCount
     }
 })

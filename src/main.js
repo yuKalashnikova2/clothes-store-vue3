@@ -14,6 +14,7 @@ const firebaseConfig = {
     appId: '1:751534893657:web:bf34b8285a981e68b29f48',
 }
 
+
 initializeApp(firebaseConfig)
 
 const pinia = createPinia()

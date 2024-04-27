@@ -1,7 +1,17 @@
 <script setup>
+import { ref, watchEffect } from 'vue'
+import { useAuthUsersStore } from '../stores/authUsers'
 import CartHeaderProducts from '../components/cart/CartHeaderProducts.vue'
 import CartListItem from '../components/cart/CartListItem.vue'
 import Button from '../components/Button.vue'
+
+const store = useAuthUsersStore()
+const shipping = ref(5)
+const grandTotal = ref(0)
+watchEffect(() => {
+    grandTotal.value = store.subtotalPrice + shipping.value
+})
+
 </script>
 <template>
     <div class="cart">
@@ -46,11 +56,11 @@ import Button from '../components/Button.vue'
             <div class="cart__total__subtotal__list">
                 <div class="cart__total__subtotal__item">
                     <span>Sub Total</span>
-                    <span>$513.00</span>
+                    <span>$ЦЕНА {{ store.subtotalPrice }} </span>
                 </div>
                 <div class="cart__total__subtotal__item">
                     <span>Shipping</span>
-                    <span>$5.00</span>
+                    <span>${{ shipping }}.00</span>
                 </div>
                 <div
                     class="cart__total__subtotal__item cart__total__subtotal__item_bold cart__total__subtotal__item_mt"
@@ -59,7 +69,7 @@ import Button from '../components/Button.vue'
                         >Grand Total</span
                     >
                     <span class="cart__total__subtotal__item_bold"
-                        >$518.00</span
+                        >${{ grandTotal }}.00</span
                     >
                 </div>
             </div>
