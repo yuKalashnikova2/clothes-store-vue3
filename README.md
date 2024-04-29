@@ -1,7 +1,12 @@
-# Vue 3 + Vite
+# Описание: Магазин мужской и женской одежды (Vue 3 Composition API + Vite )
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Технологии:
 
-## Recommended IDE Setup
+- **Vue 3(Composition API)**
+- **Vue Router**
+- **Firebase(Firebase Database, Authentication(email/password), Storage(для картинок)** 
+- **Pinia**
+- **Vue-3-slider-component (для input range)** 
+- **Swiper (для банера и для Feedback)** 
+- **Prettier** 
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
