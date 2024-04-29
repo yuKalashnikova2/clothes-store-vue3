@@ -22,6 +22,13 @@ import Info from '../views/Info.vue'
 import SignOut from '../views/SignOut.vue'
 import SignUpSuccess from '../views/SignUpSuccess.vue'
 
+const checkAuth = (to, from, next) => {
+    if (!localStorage.getItem('token')) {
+        next('/signin')
+    } else {
+        next()
+    }
+}
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -30,60 +37,61 @@ const router = createRouter({
             components: {
                 header: HeaderTop,
                 main: MainPage,
-                footer: Footer
-
-            }
+                footer: Footer,
+            },
         },
         {
             path: '/signin',
             components: {
                 header: HeaderSign,
-                main: SignIn
-            }
+                main: SignIn,
+            },
         },
         {
             path: '/signup',
             components: {
                 header: HeaderSign,
-                main: SignUp
-            }
+                main: SignUp,
+            },
         },
         {
             path: '/signupsuccess',
             components: {
                 header: HeaderSign,
-                main: SignUpSuccess
-            }
+                main: SignUpSuccess,
+            },
+            beforeEnter: checkAuth,
         },
-        
+
         {
             path: '/resetpassword',
             components: {
                 header: HeaderSign,
-                main: ResetPassword
-            }
+                main: ResetPassword,
+            },
         },
         {
             path: '/newpassword',
             components: {
                 header: HeaderSign,
                 main: NewPassword,
-            }
+            },
         },
         {
             path: '/shopwomen',
             components: {
                 header: HeaderTop,
                 main: ShopWomen,
-                footer: Footer
-            }
+                footer: Footer,
+            },
+            beforeEnter: checkAuth,
         },
         {
             path: '/shopwomen/fullcardproduct/:id',
             components: {
                 header: HeaderTop,
                 main: FullCardProduct,
-                footer: Footer
+                footer: Footer,
             },
         },
 
@@ -92,77 +100,83 @@ const router = createRouter({
             components: {
                 header: HeaderTop,
                 main: ShopMen,
-                footer: Footer
-            }
+                footer: Footer,
+            },
+            beforeEnter: checkAuth,
         },
         {
             path: '/shopemen/fullcardproduct/:id',
             components: {
                 header: HeaderTop,
                 main: FullCardProduct,
-                footer: Footer
+                footer: Footer,
             },
         },
-       
+
         {
             path: '/cart',
             components: {
                 header: HeaderTop,
                 main: CartPage,
-                footer: Footer
-            }
+                footer: Footer,
+            },
+            beforeEnter: checkAuth,
         },
         {
             path: '/cart/checkout',
             components: {
                 header: HeaderTop,
                 main: CheckOut,
-                footer: Footer
-            }
+                footer: Footer,
+            },
+            beforeEnter: checkAuth,
         },
         {
             path: '/error',
             components: {
                 header: HeaderTop,
                 main: ErrorPage,
-                footer: Footer
-            }
+                footer: Footer,
+            },
         },
         {
             path: '/cart/orderconfirmed',
             components: {
                 header: HeaderTop,
                 main: OrderConfirm,
-                footer: Footer
-            }
+                footer: Footer,
+            },
+            beforeEnter: checkAuth,
         },
         {
             path: '/user',
             components: {
                 header: HeaderTop,
                 main: UserProfile,
-                footer: Footer
+                footer: Footer,
             },
             children: [
                 {
-                  path: 'wishlist',
-                  component: WishList
+                    path: 'wishlist',
+                    component: WishList,
                 },
                 {
-                  path: 'orders',
-                  component: Orders
+                    path: 'orders',
+                    component: Orders,
                 },
                 {
                     path: 'info',
-                    component: Info
-                  },
+                    component: Info,
+                },
                 {
-                  path: 'signout',
-                  component: SignOut
-                }
-              ]
+                    path: 'signout',
+                    component: SignOut,
+                },
+            ],
+            beforeEnter: checkAuth,
         },
-    ]
+        { path: '/:pathMatch(.*)*', redirect: '/error' },
+    ],
 })
 
 export default router
