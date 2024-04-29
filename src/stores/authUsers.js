@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useFirebaseStore } from './getDB'
 
 import {
@@ -124,6 +124,7 @@ export const useAuthUsersStore = defineStore('authusers', () => {
 
     const cartItems = ref([])
     const subtotalPrice = ref(0)
+    // const countItems = ref(0)
     const getCartItems = async () => {
         const currentUser = auth.currentUser
         if (!currentUser) {
@@ -135,6 +136,7 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             if (userDocSnapshot.exists()) {
                 const userData = userDocSnapshot.data()
                 cartItems.value = Array.from(userData.cart, (item) => ({ ...item, count: 1 }));
+                // countItems.value = cartItems.value.length()
                 // cartItems.value = [{ ...userData.cart, count: 1}]
             }
             console.log('Данные корзины получены ВОТ ЭТА ФУНКЦИЯ:', cartItems.value)
@@ -143,7 +145,11 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         }
     }
     //геттер для общей суммы
-    const getTotalCount = cartItems.value.map((item) => item.count).reduce((a, b) => a + b, 0)
+//   watchEffect()(() => {
+//         countItems.value = cartItems.value.length()
+//         console.log(countItems.value, 'countItems.value')
+//     })
+   
     const deleteCartItem = async (itemId) => {
         const currentUser = auth.currentUser
         if (!currentUser) {
@@ -235,6 +241,27 @@ export const useAuthUsersStore = defineStore('authusers', () => {
             console.error('Ошибка при удалении товара из wishlist:', error)
         }
     }
+
+    // const coupons = ref([])
+    // const isErrorCoupon = ref(false)
+    // const getCoupons = async () => {
+    //     const currentUser = auth.currentUser
+    //     if (!currentUser) {
+    //         throw new Error('Пользователь не авторизован')
+    //     }
+    //     const userDocRef = doc(firebase.db, 'coupons', currentUser.uid)
+    //     try {
+    //         const userDocSnapshot = await getDoc(userDocRef)
+    //         if (userDocSnapshot.exists()) {
+    //             const userData = userDocSnapshot.data()
+    //             coupons.value = userData.coupons
+    //         }
+    //         console.log('Данные КУПОНОВ получены:', coupons.value)
+    //     } catch (error) {
+    //         isErrorCoupon.value = true
+    //         console.error('Ошибка при получении данных КУПОНА:', error)
+    //     }
+    // }
     return {
         login,
         changeStatusUser,
@@ -253,6 +280,9 @@ export const useAuthUsersStore = defineStore('authusers', () => {
         wishlistItems,
         getWishListItems,
         deleteWishListItems,
-        getTotalCount
+        // coupons,
+        // isErrorCoupon,
+        // getCoupons
+
     }
 })

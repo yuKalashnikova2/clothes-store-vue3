@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useAuthUsersStore } from '../../stores/authUsers'
 
 import Counter from './Counter.vue'
@@ -8,13 +8,16 @@ const auth = useAuthUsersStore()
 
 const totalPrice = ref(0)
 const count = ref(1)
+watchEffect(() => {
+    totalPrice.value
+})
 const handleTotalPrice = (price, newCount, isDec) => {
     totalPrice.value = price
     count.value = newCount
     if (isDec) {
         auth.subtotalPrice = auth.subtotalPrice - totalPrice.value
     } else {
-        auth.subtotalPrice = auth.subtotalPrice + totalPrice.value
+        auth.subtotalPrice =  totalPrice.value
     }
 }
 
@@ -73,7 +76,7 @@ const props = defineProps({
             @totalCounter="handleTotalPrice"
         />
         <div class="cart__item__shipping">Free</div>
-        <div class="cart__item__price">${{ totalPrice }}</div>
+        <div class="cart__item__price">${{ totalPrice === 0 ? price : totalPrice }}</div>
         <div class="cart__item__remove" @click="auth.deleteCartItem(id)">
             <img src="/deletecon.svg" alt="trash" />
         </div>

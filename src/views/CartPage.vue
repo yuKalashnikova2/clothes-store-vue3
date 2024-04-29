@@ -1,17 +1,51 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, onMounted } from 'vue'
 import { useAuthUsersStore } from '../stores/authUsers'
+import { useFirebaseStore } from '../stores/getDB'
 import CartHeaderProducts from '../components/cart/CartHeaderProducts.vue'
 import CartListItem from '../components/cart/CartListItem.vue'
 import Button from '../components/Button.vue'
 
 const store = useAuthUsersStore()
+const db = useFirebaseStore()
 const shipping = ref(5)
 const grandTotal = ref(0)
+
+const couponCode = ref('')
+const coupons = ref([])
+const couponSuccess = ref(false)
+const couponError = ref(false)
+const couponText = ref('')
+
 watchEffect(() => {
     grandTotal.value = store.subtotalPrice + shipping.value
 })
 
+
+function handleCoupon(str) {
+    coupons.value = db.coupons
+    let foundCoupon = false
+    coupons.value.forEach((el) => {
+        if (el.code === str) {
+            grandTotal.value = grandTotal.value / el.percent
+            couponSuccess.value = true
+            couponCode.value = ''
+            couponText.value = el.description
+            console.log('КУПОН УСПЕХ', el.description)
+            foundCoupon = true
+            setTimeout(() => {
+                couponSuccess.value = false
+            }, 3000)
+        }
+    })
+    if (!foundCoupon) {
+        couponError.value = true
+        setTimeout(() => {
+            couponError.value = false
+        }, 2000)
+        console.log('Ошибка купона')
+    }
+}
 </script>
 <template>
     <div class="cart">
@@ -39,17 +73,47 @@ watchEffect(() => {
     <CartListItem />
 
     <div class="cart__total">
-        <div class="cart__total__discount">
-            <h3 class="cart__total__discount__title">Discount Codes</h3>
-            <span>Enter your coupon code if you have one</span>
+        <div class="flex">
+            <div class="cart__total__discount">
+                <h3 class="cart__total__discount__title">Discount Codes</h3>
+                <span>Enter your coupon code if you have one</span>
 
-            <div class="cart__total__discount__input">
-                <input type="text" />
+                <div class="cart__total__discount__input">
+                    <input
+                        type="text"
+                        placeholder="Enter code sale"
+                        v-model="couponCode"
+                    />
 
-                <Button label="Apply coupon" borderNone class="nowrap" />
+                    <Button
+                        @click="handleCoupon(couponCode)"
+                        label="Apply coupon"
+                        borderNone
+                        class="nowrap"
+                    />
+                </div>
+
+                <Button label="Continue Shopping" color="secondary" />
             </div>
-
-            <Button label="Continue Shopping" color="secondary" />
+            <Transition>
+                <div
+                    :class="['cart__coupon', 'cart__coupon_error']"
+                    v-if="couponError"
+                >
+                    <div class="cart__coupon__image">
+                        <img src="/wrang.svg" alt="error" />
+                    </div>
+                    Sorry, this coupon does not exist
+                </div>
+            </Transition>
+            <Transition>
+                <div class="cart__coupon" v-if="couponSuccess">
+                    {{ couponText }}
+                    <div class="cart__coupon__image">
+                        <img src="/confirmed.svg" alt="" />
+                    </div>
+                </div>
+            </Transition>
         </div>
 
         <div class="cart__total__subtotal">
@@ -69,7 +133,7 @@ watchEffect(() => {
                         >Grand Total</span
                     >
                     <span class="cart__total__subtotal__item_bold"
-                        >${{ grandTotal }}.00</span
+                        >${{ grandTotal }}</span
                     >
                 </div>
             </div>
@@ -79,7 +143,6 @@ watchEffect(() => {
                 <router-link to="/cart/checkout">
                     <Button label="Proceed To Checkout" />
                 </router-link>
-              
             </div>
         </div>
     </div>
@@ -89,6 +152,34 @@ watchEffect(() => {
 .cart {
     padding-left: 100px;
     padding-right: 100px;
+    &__coupon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        font-weight: 500;
+        font-size: 22px;
+        letter-spacing: 0.02em;
+        color: #3c4242;
+        padding: 15px;
+        border: 1px solid #8a33fd;
+        border-radius: 12px;
+        max-width: 200px;
+        height: 300px;
+        &__image {
+            width: 80px;
+            height: 80px;
+            & img {
+                width: 100%;
+            }
+        }
+        &_error {
+            border: 1px solid rgb(234, 44, 44);
+            color: rgb(234, 44, 44);
+        }
+    }
     &__container {
         padding: 50px 0;
         display: flex;
@@ -153,7 +244,10 @@ watchEffect(() => {
                 margin-top: 40px;
                 margin-bottom: 37px;
                 overflow: hidden;
+
                 & input {
+                    padding-left: 15px;
+                    padding-right: 15px;
                 }
             }
         }
@@ -204,5 +298,18 @@ watchEffect(() => {
 
 .nowrap {
     white-space: nowrap;
+}
+.flex {
+    display: flex;
+    gap: 15px;
+}
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>

@@ -1,10 +1,12 @@
 <script setup>
+import { ref } from 'vue'
+import { useAuthUsersStore } from '../stores/authUsers'
 import Title from '../components/Title.vue'
 import Button from '../components/Button.vue'
 import CheckoutInput from '../components/CheckoutInput.vue'
 import OrderSummaryList from '../components/OrderSummaryList.vue'
-import { ref } from 'vue'
 
+const store = useAuthUsersStore()
 const firstName = ref('')
 const lastName = ref('')
 const country = ref('')
@@ -176,24 +178,24 @@ const validatePhoneNumber = (phoneNumber) => {
                             <span
                                 >Subtotal
                                 <span class="checkout__summary_gray"
-                                    >(3 items)</span
+                                    > ({{ store.cartItems.length }} items)</span
                                 ></span
                             >
-                            <span>$513.00</span>
+                            <span>${{ store.subtotalPrice }}.00</span>
                         </div>
                         <div class="checkout__summary__text">
                             <span>Savings</span>
-                            <span>-$30.00</span>
+                            <span>0.00</span>
                         </div>
                     </div>
 
                     <div class="checkout__summary__text">
                         <span>Shipping</span>
-                        <span>-$5.00</span>
+                        <span>5.00</span>
                     </div>
                     <div class="checkout__summary__text">
                         <span>Total</span>
-                        <span>$478.00</span>
+                        <span>${{ store.subtotalPrice }}.00</span>
                     </div>
                 </div>
             </div>

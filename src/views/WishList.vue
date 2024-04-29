@@ -5,7 +5,6 @@ import Title from '../components/Title.vue'
 import CardFavorites from '../components/CardFavorites.vue'
 import Button from '../components/Button.vue'
 
-// const cardFavoritesList = ref(['1', '2', '3', '4', '5', '6', '7', '8'])
 
 const store = useAuthUsersStore()
 
