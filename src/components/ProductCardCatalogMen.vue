@@ -3,8 +3,11 @@ import { ref } from 'vue'
 import ProductCard from './ProductCard.vue'
 import { useFirebaseStore } from '../stores/getDB'
 
+
 const store = useFirebaseStore()
 const isMale = ref(true)
+
+
 </script>
 
 <template>

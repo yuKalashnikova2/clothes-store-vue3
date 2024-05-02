@@ -1,11 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useProductsStore } from '../../stores/index.js'
 import { useFirebaseStore } from '../../stores/getDB'
 import VueSlider from 'vue-3-slider-component'
 import SidebarTitle from './SidebarTitle.vue'
 import SidebarSizeItem from './SidebarSizeItem.vue'
 import SidebarColorItem from './SidebarColorItem.vue'
+import { useFilteredItemsByCategory } from '../../composables/useFilterItems-t.js'
 
 const value = ref([40, 60])
 const maxRange = ref(200)
@@ -15,15 +16,31 @@ const db = useFirebaseStore()
 const categoriesClothes = ref([
     'Jeans',
     'Payjamas',
-    'Joggers',
+    'Jackets',
     'Full sleeve T-shirts',
-    'Boxers',
-    'Kurti',
-    'Plain T-shirts',
+    'Shorts',
+    'Sweaters',
+    'Pants',
     'Printed T-shirts',
     'Tops',
     'Dresses',
+    'Sweatshirts',
 ])
+
+const selectedCategory = ref('Pants')
+const chooseCat = ref([])
+
+const changeCategory = (category) => {
+    selectedCategory.value = category
+
+    console.log('вот категория которая попадает', selectedCategory.value)
+}
+
+watch(selectedCategory, (newCategory) => {
+    const { filteredItems } = useFilteredItemsByCategory(newCategory)
+    chooseCat.value = filteredItems
+    console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value, chooseCat.value)
+})
 </script>
 
 <template>
@@ -41,11 +58,15 @@ const categoriesClothes = ref([
                 <li
                     class="sidebar__categories__list__item"
                     v-for="category in categoriesClothes"
+                    :key="category"
+                    @click="changeCategory(category)"
                 >
                     {{ category }}
                     <img src="/arrow-rigth.svg" alt="arrow-rigth" />
                 </li>
             </ul>
+
+            <div></div>
         </div>
 
         <SidebarTitle

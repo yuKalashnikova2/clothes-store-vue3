@@ -80,6 +80,8 @@ export const useFirebaseStore = defineStore('firebase', () => {
         women,
         men,
         users,
+        collectionMenProducts,
+        collectionWomenProducts,
         collectionUsers,
         db,
     }
