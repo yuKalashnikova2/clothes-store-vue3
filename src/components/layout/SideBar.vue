@@ -2,45 +2,50 @@
 import { ref, watch } from 'vue'
 import { useProductsStore } from '../../stores/index.js'
 import { useFirebaseStore } from '../../stores/getDB'
+import { useFilterItems} from '../../stores/filterItems'
 import VueSlider from 'vue-3-slider-component'
 import SidebarTitle from './SidebarTitle.vue'
 import SidebarSizeItem from './SidebarSizeItem.vue'
 import SidebarColorItem from './SidebarColorItem.vue'
-import { useFilteredItemsByCategory } from '../../composables/useFilterItems-t.js'
+
 
 const value = ref([40, 60])
 const maxRange = ref(200)
 const minRange = ref(20)
 const store = useProductsStore()
 const db = useFirebaseStore()
-const categoriesClothes = ref([
-    'Jeans',
-    'Payjamas',
-    'Jackets',
-    'Full sleeve T-shirts',
-    'Shorts',
-    'Sweaters',
-    'Pants',
-    'Printed T-shirts',
-    'Tops',
-    'Dresses',
-    'Sweatshirts',
-])
+const filterStore = useFilterItems()
+// const categoriesClothes = ref([
+//     'Jeans',
+//     'Payjamas',
+//     'Jackets',
+//     'Full sleeve T-shirts',
+//     'Shorts',
+//     'Sweaters',
+//     'Pants',
+//     'Printed T-shirts',
+//     'Tops',
+//     'Dresses',
+//     'Sweatshirts',
+// ])
 
-const selectedCategory = ref('Pants')
-const chooseCat = ref([])
+// const selectedCategory = ref('Pants')
+// const chooseCat = ref([])
 
-const changeCategory = (category) => {
-    selectedCategory.value = category
+// const changeCategory = (category) => {
+//     selectedCategory.value = category
 
-    console.log('вот категория которая попадает', selectedCategory.value)
-}
+//     console.log('вот категория которая попадает', selectedCategory.value)
+// }
 
-watch(selectedCategory, (newCategory) => {
-    const { filteredItems } = useFilteredItemsByCategory(newCategory)
-    chooseCat.value = filteredItems
-    console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value, chooseCat.value)
-})
+// watch(selectedCategory, (newCategory) => {
+//     const { filteredItems } = useFilteredItemsByCategory(newCategory)
+//    chooseCat.value = filteredItems
+  
+//     console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value,chooseCat.value)
+// })
+
+
 </script>
 
 <template>
@@ -57,15 +62,15 @@ watch(selectedCategory, (newCategory) => {
             <ul class="sidebar__categories__list">
                 <li
                     class="sidebar__categories__list__item"
-                    v-for="category in categoriesClothes"
+                    v-for="category in filterStore.categoriesClothes"
                     :key="category"
-                    @click="changeCategory(category)"
+                    @click="filterStore.changeCategory(category)"
                 >
                     {{ category }}
                     <img src="/arrow-rigth.svg" alt="arrow-rigth" />
                 </li>
             </ul>
-
+  
             <div></div>
         </div>
 
