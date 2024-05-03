@@ -89,9 +89,19 @@ const props = defineProps({
     justify-content: space-between;
     align-items: center;
     padding: 50px 0;
+    @media (max-width: 767px) {
+        padding: 30px 0;
+        flex-direction: column;
+        gap: 15px;
+    }
     &__top {
         display: flex;
         gap: 20px;
+        @media (max-width: 767px) {
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
     }
     &__image {
         width: 105px;

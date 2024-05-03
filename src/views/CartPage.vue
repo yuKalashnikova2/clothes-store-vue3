@@ -152,6 +152,10 @@ function handleCoupon(str) {
 .cart {
     padding-left: 100px;
     padding-right: 100px;
+    @media (max-width: 767px) {
+        padding-left: 10px;
+    padding-right: 10px;
+    }
     &__coupon {
         display: flex;
         justify-content: center;
@@ -220,6 +224,11 @@ function handleCoupon(str) {
         justify-content: space-between;
         padding: 0 100px;
         background: #f6f6f6;
+        @media (max-width: 767px) {
+            padding: 0 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
         &__discount {
             padding-top: 29px;
             &__title {
@@ -302,6 +311,9 @@ function handleCoupon(str) {
 .flex {
     display: flex;
     gap: 15px;
+    @media(max-width: 767px) {
+        flex-direction: column;
+    }
 }
 .v-enter-active,
 .v-leave-active {

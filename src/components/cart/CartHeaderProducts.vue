@@ -29,5 +29,8 @@ const cartHeaders = ref([
   font-size: 18px;
   text-transform: uppercase;
   text-align: center;
+  @media (max-width: 776px) {
+    display: none;
+  }
 }
 </style>

@@ -37,5 +37,9 @@ onMounted(async () => {
     & > *:not(:last-child) {
         border-bottom: 1px solid #bebcbd;
     }
+    @media(max-width: 992px) {
+        padding: 0;
+        width: 100%;
+    }
 }
 </style>
