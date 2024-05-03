@@ -7,7 +7,6 @@ export const useFilterItems = defineStore('filteritems', () => {
         'Jeans',
         'Pajamas',
         'Jackets',
-        'Full sleeve T-shirts',
         'Shorts',
         'Sweaters',
         'Pants',
@@ -16,26 +15,21 @@ export const useFilterItems = defineStore('filteritems', () => {
         'Dresses',
         'Sweatshirts',
     ])
-    
+
     const selectedCategory = ref('Pants')
     const chooseCat = ref([])
-   
-    
+
     const changeCategory = (category) => {
         selectedCategory.value = category
         console.log('вот категория которая попадает', selectedCategory.value)
     }
-    
+
     watch(selectedCategory, (newCategory) => {
         const { filteredItems } = useFilteredItemsByCategory(newCategory)
-       chooseCat.value = filteredItems
-        // if(filteredItems.value.length > 0) {
-        //     dontHaveItems.value = 'Sorry, don\'t have this category'
-        // }
-        console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value,chooseCat.value)
+        chooseCat.value = filteredItems
+        console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value, chooseCat.value)
     })
-    
-    
+
     return {
         categoriesClothes,
         selectedCategory,

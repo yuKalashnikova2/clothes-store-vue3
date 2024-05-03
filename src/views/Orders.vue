@@ -7,7 +7,7 @@ import CardOrder from '../components/CardOrder.vue'
         <Title title="My Orders" decor="false" />
 
         <div class="orders__list">
-            <CardOrder v-for="i in 6" />
+            <CardOrder />
         </div>
     </div>
 </template>
