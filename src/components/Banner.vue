@@ -7,7 +7,7 @@ import 'swiper/scss'
 import 'swiper/scss/scrollbar'
 </script>
 <template>
-  <!-- :autoplay="{ delay: 5000 }" -->
+ 
   <Swiper
     :slides-per-view="1"
     :touch="true"
@@ -15,6 +15,7 @@ import 'swiper/scss/scrollbar'
     :modules="[Scrollbar, Autoplay]"
     :scrollbar="{ draggable: true }"
     effect="scrollbar"
+    :autoplay="{ delay: 5000 }"
   >
     <SwiperSlide>
       <div class="banner">

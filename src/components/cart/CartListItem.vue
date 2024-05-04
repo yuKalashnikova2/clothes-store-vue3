@@ -15,7 +15,6 @@ onMounted(async () => {
 </script>
 <template>
     <div class="cart__list">
-        <CartItem />
         <CartItem
             v-for="item in dataCart"
             :key="item.id"

@@ -84,7 +84,6 @@ const router = createRouter({
                 main: ShopWomen,
                 footer: Footer,
             },
-            beforeEnter: checkAuth,
         },
         {
             path: '/shopwomen/fullcardproduct/:id',
@@ -102,7 +101,6 @@ const router = createRouter({
                 main: ShopMen,
                 footer: Footer,
             },
-            beforeEnter: checkAuth,
         },
         {
             path: '/shopemen/fullcardproduct/:id',
