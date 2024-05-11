@@ -9,7 +9,7 @@ import CardCategories from '../components/CardCategories.vue'
 import Title from '../components/Title.vue'
 
 import TopBrandsDeal from '../components/TopBrandsDeal.vue'
-import FeedbacCard from '../components/FeedbacCard.vue'
+import CarouselFeed from '../components/feedback-slide/CarouselFeed.vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
@@ -65,24 +65,7 @@ const db = useFirebaseStore()
 
             <div class="content_margin_135">
                 <Title title="Feedback" decor />
-                <swiper :modules="[Pagination]" :pagination="true">
-                    <SwiperSlide class="content__feedback">
-                        <FeedbacCard />
-                        <FeedbacCard />
-                        <FeedbacCard />
-                    </SwiperSlide>
-
-                    <SwiperSlide class="content__feedback">
-                        <FeedbacCard />
-                        <FeedbacCard />
-                        <FeedbacCard />
-                    </SwiperSlide>
-                    <SwiperSlide class="content__feedback">
-                        <FeedbacCard />
-                        <FeedbacCard />
-                        <FeedbacCard />
-                    </SwiperSlide>
-                </swiper>
+                <CarouselFeed class="content__feedback" />
             </div>
         </div>
     </div>
