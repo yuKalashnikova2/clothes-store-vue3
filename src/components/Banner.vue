@@ -15,8 +15,9 @@ import 'swiper/scss/scrollbar'
     :modules="[Scrollbar, Autoplay]"
     :scrollbar="{ draggable: true }"
     effect="scrollbar"
-    :autoplay="{ delay: 5000 }"
+
   >
+  <!-- :autoplay="{ delay: 5000 }" -->
     <SwiperSlide>
       <div class="banner">
         <div class="banner__text">
@@ -25,8 +26,8 @@ import 'swiper/scss/scrollbar'
           <h4 class="banner__subtitle">cool / colorful / comfy</h4>
           ool / Colorful / Comfy Shop Now
 
-          <router-link to="/shop">
-            <Button label="Shop Now" size="medium" />
+          <router-link to="/shopmen">
+            <Button label="Shop Now" size="medium" class="shop_width" />
           </router-link>
         </div>
         <div class="for"></div>
@@ -87,17 +88,6 @@ import 'swiper/scss/scrollbar'
       font-size: 32px;
     }
   }
-  // &__button {
-  //   border-radius: 8px;
-  //   padding: 16px 72px;
-  //   background: #fff;
-  //   border: none;
-  //   font-weight: 700;
-  //   font-size: 24px;
-  //   text-align: center;
-  //   color: #3c4242;
-  //   cursor: pointer;
-  // }
 }
 .for {
   @media (max-width: 767px) {
@@ -108,6 +98,14 @@ import 'swiper/scss/scrollbar'
   background-color: #fff;
   & img {
     width: 100%;
+  }
+}
+.shop_width {
+  @media(max-width: 992px) {
+    width: 300px;
+  }
+  @media(max-width: 767px) {
+    width: 200px;
   }
 }
 </style>

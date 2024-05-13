@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useProductsStore } from '../../stores/index.js'
 import { useFirebaseStore } from '../../stores/getDB'
 import { useFilterItems} from '../../stores/filterItems'
@@ -15,35 +15,6 @@ const minRange = ref(20)
 const store = useProductsStore()
 const db = useFirebaseStore()
 const filterStore = useFilterItems()
-// const categoriesClothes = ref([
-//     'Jeans',
-//     'Payjamas',
-//     'Jackets',
-//     'Full sleeve T-shirts',
-//     'Shorts',
-//     'Sweaters',
-//     'Pants',
-//     'Printed T-shirts',
-//     'Tops',
-//     'Dresses',
-//     'Sweatshirts',
-// ])
-
-// const selectedCategory = ref('Pants')
-// const chooseCat = ref([])
-
-// const changeCategory = (category) => {
-//     selectedCategory.value = category
-
-//     console.log('вот категория которая попадает', selectedCategory.value)
-// }
-
-// watch(selectedCategory, (newCategory) => {
-//     const { filteredItems } = useFilteredItemsByCategory(newCategory)
-//    chooseCat.value = filteredItems
-  
-//     console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value,chooseCat.value)
-// })
 
 
 </script>

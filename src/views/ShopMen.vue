@@ -1,6 +1,11 @@
 <script setup>
+import { onMounted } from 'vue'
 import SideBar from '../components/layout/SideBar.vue'
 import ProductCardCatalogMen from '../components/ProductCardCatalogMen.vue'
+
+onMounted(() => {
+    window.scrollTo(0,0)
+})
 
 </script>
 
@@ -20,5 +25,9 @@ import ProductCardCatalogMen from '../components/ProductCardCatalogMen.vue'
         &__content {
             padding: 33px 50px;
         }
+        @media (max-width: 992px) {
+        flex-direction: column;
+        margin: 0 ;
+    }
     }
 </style>

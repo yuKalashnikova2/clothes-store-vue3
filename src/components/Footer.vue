@@ -5,39 +5,39 @@
         <div class="footer__info__text">
           <h2 class="footer__info__title">Need Help</h2>
           <div class="footer__info__description">
-            <span>Contact Us</span>
-            <span>Track Order</span>
-            <span>Returns & Refunds</span>
-            <span>FAQ's</span>
-            <span>Career</span>
+            <a href="#">Contact Us</a>
+            <a href="#">Track Order</a>
+            <a href="#">Returns & Refunds</a>
+            <a href="#">FAQ's</a>
+            <a href="#">Career</a>
           </div>
         </div>
 
         <div class="footer__info__text">
           <h2 class="footer__info__title">Company</h2>
           <div class="footer__info__description">
-            <span>About Us</span>
-            <span>euphoria Blog</span>
-            <span>euphoriastan</span>
-            <span>Collaboration</span>
-            <span>Media</span>
+            <a href="#">About Us</a>
+            <a href="#">euphoria Blog</a>
+            <a href="#">euphoriastan</a>
+            <a href="#">Collaboration</a>
+            <a href="#">Media</a>
           </div>
         </div>
 
         <div class="footer__info__text">
           <h2 class="footer__info__title">More Info</h2>
           <div class="footer__info__description">
-            <span>Term and Conditions</span>
-            <span>Privacy Policy</span>
-            <span>Shipping Policy</span>
-            <span>Sitemap</span>
+            <a href="#">Term and Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">Sitemap</a>
           </div>
         </div>
 
         <div class="footer__info__text">
           <h2 class="footer__info__title">Location</h2>
           <div class="footer__info__description">
-            <span>support@euphoria.in</span>
+            <a href="#">support@euphoria.in</a>
             <span>Eklingpura Chouraha, Ahmedabad Main Road</span>
             <span>(NH 8- Near Mahadev Hotel) Udaipur, India- 313002</span>
           </div>
@@ -46,24 +46,24 @@
 
       <div class="footer__social">
         <div class="footer__social__icons">
-          <div class="footer__social__icons__item">
+          <a href="https://www.facebook.com" class="footer__social__icons__item">
             <img src="/social/soc-1.svg" alt="facebook" />
-          </div>
-          <div class="footer__social__icons__item">
+          </a>
+          <a href="https://www.linkedin.com" class="footer__social__icons__item">
             <img src="/social/soc-2.svg" alt="instagram" />
-          </div>
-          <div class="footer__social__icons__item">
+          </a>
+          <a href="https://twitter.com" class="footer__social__icons__item">
             <img src="/social/soc-3.svg" alt="twitter" />
-          </div>
-          <div class="footer__social__icons__item">
+          </a>
+          <a href="https://www.youtube.com" class="footer__social__icons__item">
             <img src="/social/soc-4.svg" alt="youtube" />
-          </div>
+          </a>
         </div>
 
         <div class="footer__social__download">
           <h2 class="footer__info__title">Download The App</h2>
           <div class="footer__social__download__app">
-            <div class="footer__social__download__app__item">
+            <a href="https://play.google.com" class="footer__social__download__app__item">
               <img src="/social/googleplay.svg" alt="" />
               <div class="footer__social__download__app__item__text">
                 <span>android app on</span>
@@ -71,8 +71,8 @@
                   >Google Play</span
                 >
               </div>
-            </div>
-            <div class="footer__social__download__app__item">
+            </a>
+            <a href='https://www.apple.com/app-store' class="footer__social__download__app__item">
               <img src="/social/appstore.svg" alt="" />
               <div class="footer__social__download__app__item__text">
                 <span>Available on the</span>
@@ -80,7 +80,7 @@
                   >App Store</span
                 >
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -141,12 +141,19 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
-      & span {
+      & a, span {
         display: block;
         font-weight: 500;
         font-size: 18px;
         line-height: 217%;
+        color: #f6f6f6;
+     
       }
+    & a {
+      &:hover {
+          text-decoration: underline;
+        }
+    }
     }
   }
   &__social {

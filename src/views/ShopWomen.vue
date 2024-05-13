@@ -1,7 +1,11 @@
 <script setup>
+import { onMounted } from 'vue'
 import SideBar from '../components/layout/SideBar.vue'
 import ProductCardCatalog from '../components/ProductCardCatalog.vue'
 
+onMounted(() => {
+    window.scrollTo(0,0)
+})
 </script>
 
 <template>

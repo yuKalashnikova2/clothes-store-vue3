@@ -12,7 +12,6 @@ export const useFilterItems = defineStore('filteritems', () => {
         'Pants',
         'Printed T-shirts',
         'Tops',
-        'Dresses',
         'Sweatshirts',
     ])
 

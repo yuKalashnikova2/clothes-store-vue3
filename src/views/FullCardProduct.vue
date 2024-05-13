@@ -70,7 +70,7 @@ const updateCurrentImage = (image) => {
                 <div class="full-card__description__buttons">
                     <Button label="Add To Cart"
                     @click="auth.addToCart(selectedProduct)" />
-                    <Button label="$63.00" color="secondary" />
+                    <Button label="$63.00" color="secondary" class="dis" />
                 </div>
             </div>
 
@@ -123,7 +123,12 @@ const updateCurrentImage = (image) => {
             height: 785px;
             overflow: hidden;
             @media (max-width: 992px) {
-                width: 100%;
+                width: 400px;
+                height: 400px;
+            }
+            @media (max-width: 576px) {
+                width: 200px;
+                height: 200px;
             }
             & img {
                 width: 100%;
@@ -211,6 +216,13 @@ const updateCurrentImage = (image) => {
             height: 50%;
             border-radius: 12px;
         }
+    }
+}
+
+.dis {
+    cursor: none;
+    &:hover {
+        background-color: #fff;
     }
 }
 </style>

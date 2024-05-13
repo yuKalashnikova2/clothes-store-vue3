@@ -5,10 +5,10 @@ import {  watchEffect } from 'vue'
 import { useFilterItems } from '../stores/filterItems'
 
 const storeFilter = useFilterItems()
-watchEffect(() => {
-    storeFilter.chooseCat.value
-    console.log(storeFilter.chooseCat.value, 'ДЛИНА МАССИВА')
-})
+// (() => {
+//     storeFilter.chooseCat.value
+//     console.log(storeFilter.chooseCat.value, 'ДЛИНА МАССИВА')
+// })
 
 const store = useFirebaseStore()
 </script>
@@ -50,5 +50,8 @@ const store = useFirebaseStore()
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+    @media (max-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style>
