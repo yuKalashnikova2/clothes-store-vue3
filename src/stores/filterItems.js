@@ -15,6 +15,7 @@ export const useFilterItems = defineStore('filteritems', () => {
         'Sweatshirts',
     ])
 
+
     const selectedCategory = ref('Pants')
     const chooseCat = ref([])
 

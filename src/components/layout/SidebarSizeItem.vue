@@ -5,10 +5,13 @@ const props = defineProps({
     default: 'XXS',
   },
 })
+
+const emit = defineEmits(['chooseSize'])
 </script>
 
 <template>
-  <div class="sidebar__size__item">{{ size }}</div>
+  <div class="sidebar__size__item"
+  @click="emit('chooseSize', size)">{{ size }}</div>
 </template>
 
 <style lang="scss" scoped>

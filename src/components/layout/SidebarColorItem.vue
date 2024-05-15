@@ -6,6 +6,7 @@
       },
     })
 
+    const emit = defineEmits(['chooseColor'])
     const nameColor = (color) => {
       let firstChar = color.charAt(0).toUpperCase()
       let wholeWord = firstChar + color.slice(1) 
@@ -52,7 +53,8 @@
 </script>
 
 <template>
-    <div class="sidebar__colors__item" >
+    <div class="sidebar__colors__item" 
+    @click="emit('chooseColor')">
         <div
           :class="['sidebar__colors__item__decor', getColorClass(nameColor(color))]"
         ></div>

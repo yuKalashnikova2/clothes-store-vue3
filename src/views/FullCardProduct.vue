@@ -5,8 +5,7 @@ import { useFirebaseStore } from '../stores/getDB'
 import { useAuthUsersStore } from '../stores/authUsers'
 import Button from '../components/Button.vue'
 import Title from '../components/Title.vue'
-
-import FullCardSlider from '../components/FullCard/FullCardSlider.vue'
+import FullCardSideSlider from '../components/FullCard/FullCardSideSlider.vue'
 import FullCardTable from '../components/FullCard/FullCardTable.vue'
 import FullCardColors from '../components/FullCard/FullCardColors.vue'
 import FullCardSize from '../components/FullCard/FullCardSize.vue'
@@ -22,7 +21,8 @@ watchEffect(() => {
     const id = route.params.id
     console.log(route.path)
     if (id !== undefined) {
-        const products = route.path === '/shopemen/fullcardproduct/' + id ? db.men : db.women
+        const products =
+            route.path === '/shopemen/fullcardproduct/' + id ? db.men : db.women
         const foundProduct = products.find((product) => product.id === id)
         if (foundProduct) {
             selectedProduct.value = foundProduct
@@ -45,10 +45,9 @@ const updateCurrentImage = (image) => {
 <template>
     <div class="full-card">
         <div class="full-card__image">
-
-            <FullCardSlider
-                @imageChanged="updateCurrentImage"
+            <FullCardSideSlider
                 :images="photo"
+                @imageChanged="updateCurrentImage"
             />
             <div class="full-card__image__photo">
                 <img
@@ -68,8 +67,10 @@ const updateCurrentImage = (image) => {
                 <FullCardColors />
 
                 <div class="full-card__description__buttons">
-                    <Button label="Add To Cart"
-                    @click="auth.addToCart(selectedProduct)" />
+                    <Button
+                        label="Add To Cart"
+                        @click="auth.addToCart(selectedProduct)"
+                    />
                     <Button label="$63.00" color="secondary" class="dis" />
                 </div>
             </div>
@@ -164,7 +165,7 @@ const updateCurrentImage = (image) => {
             display: flex;
             gap: 25px;
             margin-bottom: 35px;
-            @media (max-width: 576px) {
+            @media (max-width: 992px) {
                 flex-direction: column;
             }
         }
@@ -223,6 +224,22 @@ const updateCurrentImage = (image) => {
     cursor: none;
     &:hover {
         background-color: #fff;
+    }
+}
+
+.image-gallery {
+    width: 200px;
+    height: 500px;
+    margin: 0 auto;
+    & .item {
+        height: 120px;
+        box-sizing: border-box;
+        padding: 2px 0;
+        text-align: center;
+        & img {
+            height: 100%;
+            max-width: 100%;
+        }
     }
 }
 </style>
