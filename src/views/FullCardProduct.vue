@@ -227,6 +227,12 @@ const updateCurrentImage = (image) => {
     }
 }
 
-
+.dis {
+    &:hover {
+        background: none;
+        opacity: 1;
+        cursor: auto;
+    }
+}
 
 </style>
