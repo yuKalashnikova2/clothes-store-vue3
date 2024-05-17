@@ -11,7 +11,6 @@ const isMale = ref(true)
 
 watchEffect(() => {
     storeFilter.chooseCat.value
-    console.log(storeFilter.chooseCat.value, 'ДЛИНА МАССИВА')
 })
 </script>
 

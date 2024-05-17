@@ -2,12 +2,11 @@
 import { ref } from 'vue'
 import { useProductsStore } from '../../stores/index.js'
 import { useFirebaseStore } from '../../stores/getDB'
-import { useFilterItems} from '../../stores/filterItems'
+import { useFilterItems } from '../../stores/filterItems'
 import VueSlider from 'vue-3-slider-component'
 import SidebarTitle from './SidebarTitle.vue'
 import SidebarSizeItem from './SidebarSizeItem.vue'
 import SidebarColorItem from './SidebarColorItem.vue'
-
 
 const value = ref([40, 60])
 const maxRange = ref(200)
@@ -16,7 +15,12 @@ const store = useProductsStore()
 const db = useFirebaseStore()
 const filterStore = useFilterItems()
 
+const emit = defineEmits(['changePath'])
 
+const changePath = (value) => {
+    filterStore.changeCategory(value)
+    emit('changePath', value)
+}
 </script>
 
 <template>
@@ -35,13 +39,13 @@ const filterStore = useFilterItems()
                     class="sidebar__categories__list__item"
                     v-for="category in filterStore.categoriesClothes"
                     :key="category"
-                    @click="filterStore.changeCategory(category)"
+                    @click="changePath(category)"
                 >
                     {{ category }}
                     <img src="/arrow-rigth.svg" alt="arrow-rigth" />
                 </li>
             </ul>
-  
+
             <div></div>
         </div>
 
@@ -82,7 +86,7 @@ const filterStore = useFilterItems()
                 v-for="color in db.colors"
                 :key="color.id"
                 :color="color.name"
-                @chooseColor="filterStore.changeCategory(color.name)"
+                @chooseColor="changePath(color.name)"
             />
         </div>
 
@@ -96,7 +100,7 @@ const filterStore = useFilterItems()
                 v-for="size in db.sizes"
                 :key="size.id"
                 :size="size.name"
-                @chooseSize="filterStore.changeCategory(size.name)"
+                @chooseSize="changePath(size.name)"
             />
         </div>
     </div>

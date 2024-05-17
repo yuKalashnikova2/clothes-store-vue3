@@ -29,7 +29,5 @@ export function useFilteredItems(value) {
     }
 
     loadItemsBy()
-
-    console.log(filteredItems, 'ВОТ ЗАПУСК КОМПОЗИЦИИ')
     return { filteredItems }
 }
