@@ -1,12 +1,14 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import ProductCard from './ProductCard.vue'
+import Loader from './Loader.vue'
 import { useFirebaseStore } from '../stores/getDB'
 import { useFilterItems } from '../stores/filterItems'
 
 const store = useFirebaseStore()
 const storeFilter = useFilterItems()
 const isMale = ref(true)
+
 watchEffect(() => {
     storeFilter.chooseCat.value
     console.log(storeFilter.chooseCat.value, 'ДЛИНА МАССИВА')
@@ -15,6 +17,7 @@ watchEffect(() => {
 
 <template>
     <div>
+        <Loader v-if="store.isLoading" />
         <div class="product__card__catalog">
             <div v-for="item in storeFilter.chooseCat.value" :key="item.id">
                 <ProductCard
@@ -44,6 +47,13 @@ watchEffect(() => {
             </div>
         </div>
     </div>
+    <div v-if="storeFilter.chooseCat === []" class="empty">
+        <div class="empty__image">
+            <img src="/empty-cart.png" alt="" />
+        </div>
+
+        <h2>No results were found for your request</h2>
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -56,6 +66,20 @@ watchEffect(() => {
     }
     @media (max-width: 576px) {
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #3c4242;
+    gap: 30px;
+    &__image {
+        max-width: 300px;
+        & img {
+            width: 100%;
+        }
     }
 }
 </style>

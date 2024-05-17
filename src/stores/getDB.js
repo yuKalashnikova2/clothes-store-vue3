@@ -24,12 +24,15 @@ export const useFirebaseStore = defineStore('firebase', () => {
     const women = ref([])
     const men = ref([])
     const users = ref([])
+    const isLoading = ref([])
 
 
     onSnapshot(collectionSize, (snapshot) => {
+        isLoading.value = true
         snapshot.docs.forEach((doc, index) => {
             sizes.value.push({ ...doc.data(), id: doc.id })
         })
+        isLoading.value = false
         console.log(sizes, 'Наши размеры')
     })
 
@@ -84,5 +87,6 @@ export const useFirebaseStore = defineStore('firebase', () => {
         collectionWomenProducts,
         collectionUsers,
         db,
+        isLoading
     }
 })

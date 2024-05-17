@@ -96,7 +96,7 @@ const filterStore = useFilterItems()
                 v-for="size in db.sizes"
                 :key="size.id"
                 :size="size.name"
-                @chooseSize="filterStore.changeCategory(size)"
+                @chooseSize="filterStore.changeCategory(size.name)"
             />
         </div>
     </div>

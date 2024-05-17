@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
-import { useFilteredItemsByCategory } from '../composables/useFilterItems-t.js'
+import { useFilteredItems } from '../composables/useFilterItems-t.js'
 
 export const useFilterItems = defineStore('filteritems', () => {
     const categoriesClothes = ref([
@@ -15,19 +15,16 @@ export const useFilterItems = defineStore('filteritems', () => {
         'Sweatshirts',
     ])
 
-
     const selectedCategory = ref('Pants')
     const chooseCat = ref([])
 
     const changeCategory = (category) => {
         selectedCategory.value = category
-        console.log('вот категория которая попадает', selectedCategory.value)
     }
 
     watch(selectedCategory, (newCategory) => {
-        const { filteredItems } = useFilteredItemsByCategory(newCategory)
+        const { filteredItems } = useFilteredItems(newCategory)
         chooseCat.value = filteredItems
-        console.log('СРАБАТЫВАЕТ ВОТЧ', filteredItems.value, chooseCat.value)
     })
 
     return {

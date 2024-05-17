@@ -10,6 +10,7 @@ import FullCardTable from '../components/FullCard/FullCardTable.vue'
 import FullCardColors from '../components/FullCard/FullCardColors.vue'
 import FullCardSize from '../components/FullCard/FullCardSize.vue'
 import FullCardProductDetails from '../components/FullCard/FullCardProductDetails.vue'
+import Loader from '../components/Loader.vue'
 const db = useFirebaseStore()
 const auth = useAuthUsersStore()
 
@@ -45,6 +46,11 @@ const updateCurrentImage = (image) => {
 <template>
     <div class="full-card">
         <div class="full-card__image">
+            <div
+            v-if="photo.length === 0"
+             class="loader_full">
+                <Loader  />
+            </div>
             <FullCardSideSlider
                 :images="photo"
                 @imageChanged="updateCurrentImage"
@@ -115,6 +121,7 @@ const updateCurrentImage = (image) => {
         padding-left: 100px;
         justify-content: center;
         align-items: center;
+        position: relative;
         @media (max-width: 992px) {
             padding-left: 0;
             flex-direction: column;
@@ -220,26 +227,6 @@ const updateCurrentImage = (image) => {
     }
 }
 
-.dis {
-    cursor: none;
-    &:hover {
-        background-color: #fff;
-    }
-}
 
-.image-gallery {
-    width: 200px;
-    height: 500px;
-    margin: 0 auto;
-    & .item {
-        height: 120px;
-        box-sizing: border-box;
-        padding: 2px 0;
-        text-align: center;
-        & img {
-            height: 100%;
-            max-width: 100%;
-        }
-    }
-}
+
 </style>

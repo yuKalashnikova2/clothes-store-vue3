@@ -1,20 +1,19 @@
 <script setup>
 import ProductCard from './ProductCard.vue'
+import Loader from './Loader.vue'
 import { useFirebaseStore } from '../stores/getDB'
 import {  watchEffect } from 'vue'
 import { useFilterItems } from '../stores/filterItems'
 
 const storeFilter = useFilterItems()
-// (() => {
-//     storeFilter.chooseCat.value
-//     console.log(storeFilter.chooseCat.value, 'ДЛИНА МАССИВА')
-// })
+
+
 
 const store = useFirebaseStore()
 </script>
 
 <template>
-
+ <Loader v-if="store.isLoading" />
 <div class="product__card__catalog">
             <div v-for="item in storeFilter.chooseCat.value" :key="item.id">
                 <ProductCard

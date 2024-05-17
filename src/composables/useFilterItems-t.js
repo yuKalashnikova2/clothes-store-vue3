@@ -1,31 +1,24 @@
 import { ref } from 'vue'
-import { query, where, getDocs } from 'firebase/firestore'
+import { query, where, getDocs, or, and } from 'firebase/firestore'
 import { useFirebaseStore } from '../stores/getDB'
 
-export function useFilteredItemsByCategory(category) {
+export function useFilteredItems(value) {
     const store = useFirebaseStore()
     const filteredItems = ref([])
 
-    const loadItemsByCategory = async () => {
-        // const q = query(
-        //     store.collectionMenProducts || store.collectionWomenProducts,
-        //     where('category', '==', category)
-        // )
-        let q;
-        if (category) {
+    const loadItemsBy = async () => {
+        let q
+        if (value) {
             q = query(
                 store.collectionMenProducts || store.collectionWomenProducts,
-                where('category', '==', category)
-            )
-        } else if (color) {
-            q = query(
-                store.collectionMenProducts || store.collectionWomenProducts,
-                where('color', '==', color)
-            )
-        } else if (size) {
-            q = query(
-                store.collectionMenProducts || store.collectionWomenProducts,
-                where('size', '==', size)
+
+                and(
+                    or(
+                        where('category', '==', value),
+                        where('size', '==', value),
+                        where('colors', 'array-contains', value)
+                    )
+                )
             )
         }
 
@@ -35,7 +28,7 @@ export function useFilteredItemsByCategory(category) {
         })
     }
 
-    loadItemsByCategory()
+    loadItemsBy()
 
     console.log(filteredItems, 'ВОТ ЗАПУСК КОМПОЗИЦИИ')
     return { filteredItems }
